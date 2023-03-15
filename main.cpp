@@ -13,6 +13,7 @@ struct BunnyData{
     float y_vel{300.f};
     float x_acc{350.f};
     float y_acc{3000.f};
+    float jump_force{0.f};
     bool grounded{true};
 };
 
@@ -50,10 +51,21 @@ void update(sf::RectangleShape &bunny, sf::Text &debugText, float &tempsBoucle, 
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left)){
         bunnyData.x_vel -= bunnyData.x_acc;
     }
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && bunnyData.grounded){
-        bunnyData.y_vel = -bunnyData.y_acc;
-        bunnyData.grounded = false;
+    if(bunnyData.grounded){
+        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space)){
+            pressedTime += tempsBoucle;
+            debugText.setString("Space pressed for : " + std::to_string(pressedTime) + " s");
+        } else{
+            if(pressedTime != 0){
+                std::cout << "Release !" << std::endl;
+                bunnyData.y_vel = -bunnyData.y_acc;
+                bunnyData.grounded = false;
+            }
+            pressedTime = 0;
+            debugText.setString("Space is not pressed");
+        }
     }
+
 
 }
 
