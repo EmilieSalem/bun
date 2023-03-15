@@ -4,11 +4,15 @@
 const sf::Color BROWN{sf::Color(100,59,53)};
 const sf::Color BEIGE{sf::Color{230, 202, 188}};
 const sf::Color ORANGE{sf::Color{219,112,50}};
+const sf::Color PINK{sf::Color{215,124,116}};
 
 const float MAX_JUMP_FORCE{3500.f};
 const float CHARGE_ACCELERATION{1.4f};
 
 const int GRAVITY{5};
+
+sf::Texture idleTexture{};
+sf::Texture chargeTexture{};
 
 struct BunnyData{
     float x_pos{350.f};
@@ -21,7 +25,7 @@ struct BunnyData{
     bool grounded{true};
 };
 
-void move(sf::RectangleShape &bunny, sf::RectangleShape &bar, BunnyData &bunnyData, float &tempsBoucle) {
+void move(sf::Sprite &bunny, sf::RectangleShape &bar, BunnyData &bunnyData, float &tempsBoucle) {
     // Gravity
     bunnyData.y_vel += GRAVITY;
 
@@ -37,10 +41,11 @@ void move(sf::RectangleShape &bunny, sf::RectangleShape &bar, BunnyData &bunnyDa
     }
 
     bunny.setPosition(bunnyData.x_pos, bunnyData.y_pos);
-    bar.setPosition(bunnyData.x_pos + 35, bunnyData.y_pos);
+    bar.setPosition(bunnyData.x_pos + 65, bunnyData.y_pos);
 }
 
-void update(sf::RectangleShape &bunny, sf::RectangleShape &bar, sf::Text &debugText, float &tempsBoucle, float &pressedTime, BunnyData &bunnyData) {
+void update(sf::Sprite &bunny, sf::RectangleShape &bar, sf::Text &debugText, float &tempsBoucle, float &pressedTime, BunnyData &bunnyData) {
+
     
     bunnyData.x_vel = 0;
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right) && !sf::Keyboard::isKeyPressed(sf::Keyboard::Space)){
@@ -51,6 +56,7 @@ void update(sf::RectangleShape &bunny, sf::RectangleShape &bar, sf::Text &debugT
     }
     if(bunnyData.grounded){
         if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space)){
+            bunny.setTexture(chargeTexture);
             pressedTime += tempsBoucle;
             bunnyData.jump_force = pressedTime * bunnyData.y_acc * CHARGE_ACCELERATION;
             if(bunnyData.jump_force > bunnyData.y_acc){
@@ -60,6 +66,7 @@ void update(sf::RectangleShape &bunny, sf::RectangleShape &bar, sf::Text &debugT
             bar.setScale(sf::Vector2f(1,-bunnyData.jump_force/MAX_JUMP_FORCE));
         } else{
             if(pressedTime != 0){
+                bunny.setTexture(idleTexture);
                 bunnyData.y_vel = -bunnyData.jump_force;
                 bunnyData.jump_force = 0;
                 if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) bunnyData.x_vel = bunnyData.x_acc;
@@ -75,17 +82,22 @@ void update(sf::RectangleShape &bunny, sf::RectangleShape &bar, sf::Text &debugT
 }
 
 int main() {
-    sf::RenderWindow fenetre{sf::VideoMode{800, 600}, "bun"};
+    sf::RenderWindow fenetre{sf::VideoMode{1000, 600}, "bun"};
 
-    sf::RectangleShape bunny(sf::Vector2f(50, 50));
-    bunny.setFillColor(BROWN);
+    idleTexture.loadFromFile("../assets/bunny_idle.png");
+    chargeTexture.loadFromFile("../assets/bunny_charged.png");
+
+    sf::Sprite bunny{};
+    bunny.setTexture(idleTexture);
+    bunny.setScale(2.5, 2.5);
+
     bunny.setOrigin(bunny.getLocalBounds().width / 2, bunny.getLocalBounds().height / 2);
     auto bunnyData = BunnyData{};
 
     // charge bar
     sf::RectangleShape bar(sf::Vector2f(17,50));
     bar.setScale(sf::Vector2f(1,0));
-    bar.setFillColor(ORANGE);
+    bar.setFillColor(PINK);
 
     sf::Clock chrono{};
 
