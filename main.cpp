@@ -4,6 +4,9 @@
 const sf::Color BROWN{sf::Color(100,59,53)};
 const sf::Color BEIGE{sf::Color{230, 202, 188}};
 
+const float MAX_JUMP_FORCE{3500.f};
+const float CHARGE_ACCELERATION{1.4f};
+
 const int GRAVITY{5};
 
 struct BunnyData{
@@ -12,7 +15,7 @@ struct BunnyData{
     float x_vel{0.f};
     float y_vel{300.f};
     float x_acc{350.f};
-    float y_acc{3000.f};
+    float y_acc{MAX_JUMP_FORCE};
     float jump_force{0.f};
     bool grounded{true};
 };
@@ -47,10 +50,15 @@ void update(sf::RectangleShape &bunny, sf::Text &debugText, float &tempsBoucle, 
     if(bunnyData.grounded){
         if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space)){
             pressedTime += tempsBoucle;
-            debugText.setString("Space pressed for : " + std::to_string(pressedTime) + " s");
+            bunnyData.jump_force = pressedTime * bunnyData.y_acc * CHARGE_ACCELERATION;
+            if(bunnyData.jump_force > bunnyData.y_acc){
+                bunnyData.jump_force = bunnyData.y_acc;
+            }
+            debugText.setString("Jump force : " + std::to_string(bunnyData.jump_force));
         } else{
             if(pressedTime != 0){
-                bunnyData.y_vel = -bunnyData.y_acc;
+                bunnyData.y_vel = -bunnyData.jump_force;
+                bunnyData.jump_force = 0;
                 if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) bunnyData.x_vel = bunnyData.x_acc;
                 if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) bunnyData.x_vel = -bunnyData.x_acc;
                 bunnyData.grounded = false;
