@@ -4,14 +4,54 @@
 const sf::Color BROWN{sf::Color(100,59,53)};
 const sf::Color BEIGE{sf::Color{230, 202, 188}};
 
-void actualiser(sf::RectangleShape& bunny, sf::Text& debugText, float& tempsBoucle, float& pressedTime) {
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space)){
+const int GRAVITY{5};
+
+struct BunnyData{
+    float x_pos{350.f};
+    float y_pos{100.f};
+    float x_vel{0.f};
+    float y_vel{300.f};
+    float x_acc{350.f};
+    float y_acc{1000.f};
+};
+
+void move(sf::RectangleShape &bunny, BunnyData &bunnyData, float &tempsBoucle) {
+    // Gravity
+    bunnyData.y_vel += GRAVITY;
+
+    // Update position
+    bunnyData.x_pos += bunnyData.x_vel  * tempsBoucle;
+    bunnyData.y_pos +=  bunnyData.y_vel * tempsBoucle;
+
+    // Check for collision
+    if(bunnyData.y_pos >= 550){
+        bunnyData.y_pos = 550;
+        bunnyData.y_vel = 0;
+    }
+
+    bunny.setPosition(bunnyData.x_pos, bunnyData.y_pos);
+}
+
+void update(sf::RectangleShape &bunny, sf::Text &debugText, float &tempsBoucle, float &pressedTime, BunnyData &bunnyData) {
+    /*if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space)){
         pressedTime += tempsBoucle;
         debugText.setString("Space pressed for : " + std::to_string(pressedTime) + " s");
     } else{
         pressedTime = 0;
         debugText.setString("Space is not pressed");
+    }*/
+
+    bunnyData.x_vel = 0;
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right)){
+        bunnyData.x_vel += bunnyData.x_acc;
     }
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left)){
+        bunnyData.x_vel -= bunnyData.x_acc;
+    }
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space)){
+        bunnyData.y_vel = -bunnyData.y_acc;
+    }
+
 }
 
 int main() {
@@ -19,6 +59,8 @@ int main() {
 
     sf::RectangleShape bunny(sf::Vector2f(50, 50));
     bunny.setFillColor(BROWN);
+    bunny.setOrigin(bunny.getLocalBounds().width / 2, bunny.getLocalBounds().height / 2);
+    auto bunnyData = BunnyData{};
 
     sf::Clock chrono{};
 
@@ -39,14 +81,10 @@ int main() {
             if (evenement.type == sf::Event::Closed) fenetre.close();
         }
 
-        // bunny position
-        bunny.setOrigin(bunny.getLocalBounds().width / 2, bunny.getLocalBounds().height / 2);
-        bunny.setPosition(400,550);
-
         // bunny behavior
         auto tempsBoucle = chrono.restart().asSeconds();
-        actualiser(bunny, debugText, tempsBoucle, pressedTime);
-
+        update(bunny, debugText, tempsBoucle, pressedTime, bunnyData);
+        move(bunny, bunnyData, tempsBoucle);
 
         fenetre.clear(BEIGE);
         fenetre.draw(bunny);
@@ -54,6 +92,8 @@ int main() {
         fenetre.display();
     }
 }
+
+
 
 
 
