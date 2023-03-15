@@ -34,19 +34,18 @@ void move(sf::Sprite &bunny, sf::RectangleShape &bar, BunnyData &bunnyData, floa
     bunnyData.y_pos +=  bunnyData.y_vel * tempsBoucle;
 
     // Check for collision
-    if(bunnyData.y_pos >= 550){
-        bunnyData.y_pos = 550;
+    if(bunnyData.y_pos >= 600){
+        bunnyData.y_pos = 600;
         bunnyData.y_vel = 0;
         bunnyData.grounded = true;
     }
 
     bunny.setPosition(bunnyData.x_pos, bunnyData.y_pos);
-    bar.setPosition(bunnyData.x_pos + 65, bunnyData.y_pos);
+    bar.setPosition(bunnyData.x_pos + 70, bunnyData.y_pos - 50);
 }
 
 void update(sf::Sprite &bunny, sf::RectangleShape &bar, sf::Text &debugText, float &tempsBoucle, float &pressedTime, BunnyData &bunnyData) {
 
-    
     bunnyData.x_vel = 0;
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right) && !sf::Keyboard::isKeyPressed(sf::Keyboard::Space)){
         bunnyData.x_vel += bunnyData.x_acc;
@@ -91,7 +90,7 @@ int main() {
     bunny.setTexture(idleTexture);
     bunny.setScale(2.5, 2.5);
 
-    bunny.setOrigin(bunny.getLocalBounds().width / 2, bunny.getLocalBounds().height / 2);
+    bunny.setOrigin(bunny.getLocalBounds().width / 2, bunny.getLocalBounds().height);
     auto bunnyData = BunnyData{};
 
     // charge bar
