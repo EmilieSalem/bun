@@ -36,19 +36,12 @@ void move(sf::RectangleShape &bunny, BunnyData &bunnyData, float &tempsBoucle) {
 }
 
 void update(sf::RectangleShape &bunny, sf::Text &debugText, float &tempsBoucle, float &pressedTime, BunnyData &bunnyData) {
-    /*if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space)){
-        pressedTime += tempsBoucle;
-        debugText.setString("Space pressed for : " + std::to_string(pressedTime) + " s");
-    } else{
-        pressedTime = 0;
-        debugText.setString("Space is not pressed");
-    }*/
-
+    
     bunnyData.x_vel = 0;
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right)){
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right) && !sf::Keyboard::isKeyPressed(sf::Keyboard::Space)){
         bunnyData.x_vel += bunnyData.x_acc;
     }
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left)){
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left) && !sf::Keyboard::isKeyPressed(sf::Keyboard::Space)){
         bunnyData.x_vel -= bunnyData.x_acc;
     }
     if(bunnyData.grounded){
@@ -57,15 +50,15 @@ void update(sf::RectangleShape &bunny, sf::Text &debugText, float &tempsBoucle, 
             debugText.setString("Space pressed for : " + std::to_string(pressedTime) + " s");
         } else{
             if(pressedTime != 0){
-                std::cout << "Release !" << std::endl;
                 bunnyData.y_vel = -bunnyData.y_acc;
+                if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) bunnyData.x_vel = bunnyData.x_acc;
+                if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) bunnyData.x_vel = -bunnyData.x_acc;
                 bunnyData.grounded = false;
             }
             pressedTime = 0;
             debugText.setString("Space is not pressed");
         }
     }
-
 
 }
 
