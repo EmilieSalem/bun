@@ -12,7 +12,8 @@ struct BunnyData{
     float x_vel{0.f};
     float y_vel{300.f};
     float x_acc{350.f};
-    float y_acc{1000.f};
+    float y_acc{3000.f};
+    bool grounded{true};
 };
 
 void move(sf::RectangleShape &bunny, BunnyData &bunnyData, float &tempsBoucle) {
@@ -27,6 +28,7 @@ void move(sf::RectangleShape &bunny, BunnyData &bunnyData, float &tempsBoucle) {
     if(bunnyData.y_pos >= 550){
         bunnyData.y_pos = 550;
         bunnyData.y_vel = 0;
+        bunnyData.grounded = true;
     }
 
     bunny.setPosition(bunnyData.x_pos, bunnyData.y_pos);
@@ -48,8 +50,9 @@ void update(sf::RectangleShape &bunny, sf::Text &debugText, float &tempsBoucle, 
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left)){
         bunnyData.x_vel -= bunnyData.x_acc;
     }
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space)){
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && bunnyData.grounded){
         bunnyData.y_vel = -bunnyData.y_acc;
+        bunnyData.grounded = false;
     }
 
 }
