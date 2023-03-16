@@ -3,7 +3,7 @@ project(bun)
 
 set(CMAKE_CXX_STANDARD 17)
 
-add_executable(bun main.cpp ColorPalette.h GameObject.h GameObject.cpp)
+add_executable(bun main.cpp headers/ColorPalette.h headers/GameObject.h sources/GameObject.cpp)
 
 set(SFML_STATIC_LIBRARIES TRUE)
 set(SFML_DIR D:/saemi/Documents/Perso/cpp-libs/SFML/lib/cmake/SFML)

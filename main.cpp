@@ -1,7 +1,7 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
-#include "ColorPalette.h"
-#include "GameObject.h"
+#include "headers/ColorPalette.h"
+#include "headers/GameObject.h"
 
 int main() {
     // test code to display a bunny in the middle of the screen

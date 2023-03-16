@@ -1,4 +1,4 @@
-#include "GameObject.h"
+#include "../headers/GameObject.h"
 
 GameObject::GameObject(
         const std::string_view &assetPath,
