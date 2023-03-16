@@ -8,49 +8,56 @@ Bunny::Bunny() : GameObject(
 }
 
 void Bunny::applyBehavior(float loopTime) {
-    // initializing the velocity
+    // initializing velocities
     velocity.x = 0;
+    velocity.y += GRAVITY;
 
-    // right movement (blocked if charging)
+    // right | blocked if charging
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right) && !sf::Keyboard::isKeyPressed(sf::Keyboard::Space)){
         velocity.x += HORIZONTAL_ACCELERATION;
     }
 
-    // left movement (blocked if charging)
+    // left | blocked if charging
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left) && !sf::Keyboard::isKeyPressed(sf::Keyboard::Space)){
         velocity.x -= HORIZONTAL_ACCELERATION;
     }
 
-    // jump
+    // jump | only works if on the ground
     if(isGrounded){
         if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space)){
-            texture.loadFromFile(CHARGING_BUNNY_PATH.data());
-            sprite.setTexture(texture);
+            // charging
+            loadTexture(BunnyStates::CHARGING);
             pressedTime += loopTime;
             jumpForce = pressedTime * MAX_JUMP_FORCE * CHARGE_ACCELERATION_COEFF;
             if(jumpForce > MAX_JUMP_FORCE) jumpForce = MAX_JUMP_FORCE;
         } else {
-            if(pressedTime != 0){
-                texture.loadFromFile(IDLE_BUNNY_PATH.data());
-                sprite.setTexture(texture);
+            if(pressedTime != 0){ // means that the space bar was just released
+                // jumping
+                loadTexture(BunnyStates::IDLE);
                 velocity.y = -jumpForce;
                 jumpForce = 0;
+                isGrounded = false;
+                // horizontal direction of the jump
                 if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) velocity.x = HORIZONTAL_ACCELERATION;
                 if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) velocity.x = -HORIZONTAL_ACCELERATION;
-                isGrounded = false;
             }
             pressedTime = 0;
         }
     }
-
-    // Gravity
-    velocity.y += GRAVITY;
 }
 
 void Bunny::handleCollision() {
-    if(position.y >= 600){
-        position.y = 600;
+    // TODO temporary code, needs to be changed
+    if(position.y >= 1000){
+        position.y = 1000;
         velocity.y = 0;
         isGrounded = true;
+    }
+}
+
+void Bunny::loadTexture(Bunny::BunnyStates bunnyState) {
+    switch(bunnyState){
+        case BunnyStates::IDLE : texture.loadFromFile(IDLE_BUNNY_PATH.data()); break;
+        case BunnyStates::CHARGING : texture.loadFromFile(CHARGING_BUNNY_PATH.data()); break;
     }
 }

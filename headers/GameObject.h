@@ -9,7 +9,7 @@ public:
     explicit GameObject(
             std::string_view const& assetPath,
             sf::Vector2f const& initialPosition,
-            sf::Vector2f const& scale = sf::Vector2f(1,1)
+            sf::Vector2f const& p_scale = sf::Vector2f(1, 1)
                     );
 
     // managing position
@@ -28,7 +28,7 @@ protected:
     // appearance
     sf::Sprite sprite{};
     sf::Texture texture{};
-    sf::Vector2f objectScale{};
+    sf::Vector2f scale{};
 
     // physics
     sf::Vector2f position{};

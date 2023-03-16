@@ -12,8 +12,10 @@ protected:
 
 private:
     // appearance
+    enum class BunnyStates{IDLE, CHARGING};
     static constexpr std::string_view IDLE_BUNNY_PATH{"../assets/bunny_idle.png"};
     static constexpr std::string_view CHARGING_BUNNY_PATH{"../assets/bunny_charging.png"};
+    void loadTexture(BunnyStates bunnyState);
 
     // left/right movement physics
     static constexpr float HORIZONTAL_ACCELERATION{350.f};

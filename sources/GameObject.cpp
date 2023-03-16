@@ -3,12 +3,12 @@
 GameObject::GameObject(
         const std::string_view &assetPath,
         const sf::Vector2f &initialPosition,
-        const sf::Vector2f &scale
-        ) : position{initialPosition}, objectScale{scale}{
+        const sf::Vector2f &p_scale
+        ) : position{initialPosition}, scale{p_scale}{
     // loading and applying texture
     texture.loadFromFile(assetPath.data());
     sprite.setTexture(texture);
-    sprite.setScale(objectScale);
+    sprite.setScale(scale);
 
     // setting origin and position
     sprite.setOrigin(sprite.getLocalBounds().width / 2, sprite.getLocalBounds().height);
