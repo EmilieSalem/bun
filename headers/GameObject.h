@@ -34,6 +34,7 @@ protected:
     sf::Vector2f position{};
     sf::Vector2f velocity{};
     virtual void applyBehavior(float loopTime);
+    virtual void handleCollision();
 };
 
 

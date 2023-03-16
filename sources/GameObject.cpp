@@ -22,6 +22,7 @@ float GameObject::getRadius() const {
 void GameObject::update(const float loopTime) {
     applyBehavior(loopTime);
     position += velocity * loopTime;
+    handleCollision();
     sprite.setPosition(position.x, position.y);
 }
 
@@ -49,3 +50,5 @@ void GameObject::display(sf::RenderWindow &window) const {
 }
 
 void GameObject::applyBehavior(const float loopTime) { }
+
+void GameObject::handleCollision() {}
