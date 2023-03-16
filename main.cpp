@@ -1,14 +1,11 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
 #include "headers/ColorPalette.h"
-#include "headers/GameObject.h"
+#include "headers/Bunny.h"
 
 int main() {
     // test code to display a bunny in the middle of the screen
-    auto bunny = GameObject(
-            "../assets/bunny_idle.png",
-            sf::Vector2f(sf::VideoMode::getDesktopMode().width/2, sf::VideoMode::getDesktopMode().height/2),
-            sf::Vector2f(2.5, 2.5));
+    auto bunny = Bunny();
 
     sf::Clock chrono{};
 

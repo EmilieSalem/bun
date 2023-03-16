@@ -33,7 +33,6 @@ protected:
     // physics
     sf::Vector2f position{};
     sf::Vector2f velocity{};
-    sf::Vector2f acceleration{};
     virtual void applyBehavior(float loopTime);
 };
 
