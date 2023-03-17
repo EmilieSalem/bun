@@ -4,7 +4,6 @@
 #include "headers/Bunny.h"
 
 int main() {
-    // test code to display a bunny in the middle of the screen
     auto bunny = Bunny();
 
     sf::Clock chrono{};

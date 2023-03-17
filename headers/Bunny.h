@@ -6,10 +6,14 @@
 class Bunny : public GameObject {
 
 public:
+    // constructor
     explicit Bunny();
 
 protected:
+    // bunny controls and physics
     void applyBehavior(float loopTime) override;
+
+    // charge bar management
     void updateRelatedObjects() override;
     void displayRelatedObjects(sf::RenderWindow& window) const override;
 

@@ -35,6 +35,8 @@ protected:
     sf::Vector2f velocity{};
     virtual void applyBehavior(float loopTime);
     virtual void handleCollision();
+
+    // to display elements related to the GameObject, such as a ChargeBar
     virtual void updateRelatedObjects();
     virtual void displayRelatedObjects(sf::RenderWindow& window) const;
 };

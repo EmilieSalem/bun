@@ -8,6 +8,8 @@ class ChargeBar {
 public:
     // constructor
     explicit ChargeBar();
+
+    // managing bar progress and position
     void updateProgress(float percentage);
     void display(sf::RenderWindow& window) const;
     void updatePosition(float referenceX, float referenceY);

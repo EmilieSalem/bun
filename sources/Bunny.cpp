@@ -58,6 +58,7 @@ void Bunny::handleCollision() {
 }
 
 void Bunny::loadTexture(Bunny::BunnyStates bunnyState) {
+    // loading the right asset depending on the bunny state
     switch(bunnyState){
         case BunnyStates::IDLE : texture.loadFromFile(IDLE_BUNNY_PATH.data()); break;
         case BunnyStates::CHARGING : texture.loadFromFile(CHARGING_BUNNY_PATH.data()); break;
@@ -65,11 +66,15 @@ void Bunny::loadTexture(Bunny::BunnyStates bunnyState) {
 }
 
 void Bunny::updateRelatedObjects() {
+    // update the bunny
     GameObject::updateRelatedObjects();
+    // update the charge bar
     chargeBar.updatePosition(position.x, position.y);
 }
 
 void Bunny::displayRelatedObjects(sf::RenderWindow &window) const {
+    // display the bunny
     GameObject::displayRelatedObjects(window);
+    // display the charge bar
     chargeBar.display(window);
 }
