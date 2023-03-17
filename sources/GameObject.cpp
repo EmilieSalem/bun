@@ -24,6 +24,7 @@ void GameObject::update(const float loopTime) {
     position += velocity * loopTime;
     handleCollision();
     sprite.setPosition(position.x, position.y);
+    updateRelatedObjects();
 }
 
 // TODO change to only apply the duplication behavior horizontally
@@ -47,8 +48,13 @@ void GameObject::display(sf::RenderWindow &window) const {
                 );
         window.draw(sprite, transformation);
     }
+    displayRelatedObjects(window);
 }
 
 void GameObject::applyBehavior(const float loopTime) { }
 
 void GameObject::handleCollision() {}
+
+void GameObject::updateRelatedObjects() {}
+
+void GameObject::displayRelatedObjects(sf::RenderWindow &window) const {}

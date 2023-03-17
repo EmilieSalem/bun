@@ -30,6 +30,7 @@ void Bunny::applyBehavior(float loopTime) {
             pressedTime += loopTime;
             jumpForce = pressedTime * MAX_JUMP_FORCE * CHARGE_ACCELERATION_COEFF;
             if(jumpForce > MAX_JUMP_FORCE) jumpForce = MAX_JUMP_FORCE;
+            chargeBar.updateProgress(-jumpForce/MAX_JUMP_FORCE);
         } else {
             if(pressedTime != 0){ // means that the space bar was just released
                 // jumping
@@ -37,6 +38,7 @@ void Bunny::applyBehavior(float loopTime) {
                 velocity.y = -jumpForce;
                 jumpForce = 0;
                 isGrounded = false;
+                chargeBar.updateProgress(0);
                 // horizontal direction of the jump
                 if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) velocity.x = HORIZONTAL_ACCELERATION;
                 if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) velocity.x = -HORIZONTAL_ACCELERATION;
@@ -60,4 +62,14 @@ void Bunny::loadTexture(Bunny::BunnyStates bunnyState) {
         case BunnyStates::IDLE : texture.loadFromFile(IDLE_BUNNY_PATH.data()); break;
         case BunnyStates::CHARGING : texture.loadFromFile(CHARGING_BUNNY_PATH.data()); break;
     }
+}
+
+void Bunny::updateRelatedObjects() {
+    GameObject::updateRelatedObjects();
+    chargeBar.updatePosition(position.x, position.y);
+}
+
+void Bunny::displayRelatedObjects(sf::RenderWindow &window) const {
+    GameObject::displayRelatedObjects(window);
+    chargeBar.display(window);
 }

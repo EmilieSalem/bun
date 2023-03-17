@@ -35,6 +35,8 @@ protected:
     sf::Vector2f velocity{};
     virtual void applyBehavior(float loopTime);
     virtual void handleCollision();
+    virtual void updateRelatedObjects();
+    virtual void displayRelatedObjects(sf::RenderWindow& window) const;
 };
 
 

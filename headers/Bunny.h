@@ -1,6 +1,7 @@
 #ifndef BUN_BUNNY_H
 #define BUN_BUNNY_H
 #include "GameObject.h"
+#include "ChargeBar.h"
 
 class Bunny : public GameObject {
 
@@ -9,6 +10,8 @@ public:
 
 protected:
     void applyBehavior(float loopTime) override;
+    void updateRelatedObjects() override;
+    void displayRelatedObjects(sf::RenderWindow& window) const override;
 
 private:
     // appearance
@@ -28,6 +31,9 @@ private:
     static constexpr float MAX_JUMP_FORCE{3500.f};
     static constexpr float CHARGE_ACCELERATION_COEFF{1.4f};
     static constexpr float GRAVITY{5};
+
+    // charge bar
+    ChargeBar chargeBar{};
 };
 
 
