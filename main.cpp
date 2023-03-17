@@ -2,9 +2,11 @@
 #include <SFML/Graphics.hpp>
 #include "headers/ColorPalette.h"
 #include "headers/Bunny.h"
+#include "headers/Platform.h"
 
 int main() {
     auto bunny = Bunny();
+    auto platform = Platform();
 
     sf::Clock chrono{};
 
@@ -21,6 +23,7 @@ int main() {
         window.clear(BEIGE);
 
         bunny.update(loopTime);
+        platform.display(window);
         bunny.display(window);
 
         window.display();
