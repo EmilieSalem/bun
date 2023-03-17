@@ -17,19 +17,12 @@ void ChargeBar::updateProgress(float percentage) {
     bar.setScale(scale);
 }
 
-// TODO change to only apply the duplication behavior horizontally
 // TODO think of a better conception to share it with GameObject
 void ChargeBar::display(sf::RenderWindow &window) const {
     auto directions = std::array<sf::Vector2f, 9>{
-            sf::Vector2f{-1, 1},
-            sf::Vector2f{0, -1},
-            sf::Vector2f{1, -1},
             sf::Vector2f{-1, 0},
             sf::Vector2f{0, 0},
             sf::Vector2f{1, 0},
-            sf::Vector2f{-1, 1},
-            sf::Vector2f{0, 1},
-            sf::Vector2f{1, 1}
     };
     for(auto& direction : directions){
         auto transformation = sf::Transform{};

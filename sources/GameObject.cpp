@@ -27,18 +27,11 @@ void GameObject::update(const float loopTime) {
     updateRelatedObjects();
 }
 
-// TODO change to only apply the duplication behavior horizontally
 void GameObject::display(sf::RenderWindow &window) const {
     auto directions = std::array<sf::Vector2f, 9>{
-            sf::Vector2f{-1, 1},
-            sf::Vector2f{0, -1},
-            sf::Vector2f{1, -1},
             sf::Vector2f{-1, 0},
             sf::Vector2f{0, 0},
             sf::Vector2f{1, 0},
-            sf::Vector2f{-1, 1},
-            sf::Vector2f{0, 1},
-            sf::Vector2f{1, 1}
     };
     for(auto& direction : directions){
         auto transformation = sf::Transform{};
