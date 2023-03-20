@@ -5,11 +5,12 @@
 #include "headers/Platform.h"
 
 int main() {
-    auto bunny = Bunny();
-    auto platform1 = Platform(Platform::PlatformLevel::LOW);
-    //auto platform2 = Platform(Platform::PlatformLevel::MIDDLE);
-    //auto platform3 = Platform(Platform::PlatformLevel::HIGH);
+    auto gameObjects = std::vector<std::unique_ptr<GameObject>>{};
 
+    gameObjects.push_back(std::move(std::make_unique<Platform>(Platform::PlatformLevel::LOW)));
+    gameObjects.push_back(std::move(std::make_unique<Platform>(Platform::PlatformLevel::MIDDLE)));
+    gameObjects.push_back(std::move(std::make_unique<Platform>(Platform::PlatformLevel::HIGH)));
+    gameObjects.push_back(std::move(std::make_unique<Bunny>()));
 
     sf::Clock chrono{};
 
@@ -25,15 +26,21 @@ int main() {
 
         window.clear(BEIGE);
 
-        bunny.update(loopTime);
+        for(auto& gameObject : gameObjects){
+            gameObject->update(loopTime);
+        }
 
-        bunny.testCollision(platform1);
+        for(auto i{0u}; i<gameObjects.size(); ++i){
+            for(auto j{0u}; j<gameObjects.size(); ++j){
+                if(i != j){
+                    gameObjects[i]->testCollision(*gameObjects[j]);
+                }
+            }
+        }
 
-        platform1.display(window);
-        //platform2.display(window);
-        //platform3.display(window);
-
-        bunny.display(window);
+        for(auto& gameObjects : gameObjects){
+            gameObjects->display(window);
+        }
 
         window.display();
     }
