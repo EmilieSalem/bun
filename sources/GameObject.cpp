@@ -11,12 +11,8 @@ GameObject::GameObject(
     sprite.setScale(scale);
 
     // setting origin and position
-    sprite.setOrigin(sprite.getLocalBounds().width / 2, sprite.getLocalBounds().height);
+    sprite.setOrigin(sprite.getLocalBounds().width / 2, sprite.getLocalBounds().height / 2);
     sprite.setPosition(position.x, position.y);
-}
-
-float GameObject::getRadius() const {
-    return sprite.getGlobalBounds().height/2.4f;
 }
 
 void GameObject::update(const float loopTime) {
@@ -36,8 +32,8 @@ void GameObject::display(sf::RenderWindow &window) const {
     for(auto& direction : directions){
         auto transformation = sf::Transform{};
         transformation.translate(
-                direction.x * static_cast<float>(sf::VideoMode::getDesktopMode().width),
-                direction.y * static_cast<float>(sf::VideoMode::getDesktopMode().height)
+                direction.x * Utils::getScreenWidth(),
+                direction.y * Utils::getScreenHeight()
                 );
         window.draw(sprite, transformation);
     }

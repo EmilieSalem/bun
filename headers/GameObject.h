@@ -2,6 +2,7 @@
 #define BUN_GAMEOBJECT_H
 
 #include <SFML/Graphics.hpp>
+#include "../headers/Utils.h"
 
 class GameObject {
 public:
@@ -13,7 +14,8 @@ public:
                     );
 
     // managing position
-    float getRadius() const;
+    inline float getWidth() const {return sprite.getGlobalBounds().width;};
+    inline float getHeight() const {return sprite.getGlobalBounds().height;};
     void update(float loopTime);
     void display(sf::RenderWindow& window) const;
 
