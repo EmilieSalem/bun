@@ -59,7 +59,18 @@ void Bunny::handleFloorTemp() {
 }
 
 void Bunny::handleCollision(GameObject &otherObject) {
-    GameObject::handleCollision(otherObject);
+    if(otherObject.getType() == ObjectType::PLATFORM){
+        /* The 3 conditions correspond to:
+         * The bunny must be going downwards ( velocity.y >= 0.f )
+         * The bunny must be above the platform ( position.y < otherObject.getY() )
+         * The bunny must be low enough so that the collision doesn't create a rough "teleportation" ( position.y >= otherObject.getY() - otherObject.getHeight()/3 )
+         */
+        if(velocity.y >= 0.f && position.y < otherObject.getY() && position.y >= otherObject.getY() - otherObject.getHeight()/3){
+            velocity.y = 0.f;
+            position.y = otherObject.getY() - otherObject.getHeight()/3; // bunny placed a bit lower for aesthetic purposes
+            isGrounded = true;
+        }
+    }
 }
 
 void Bunny::loadTexture(Bunny::BunnyStates bunnyState) {

@@ -48,10 +48,10 @@ void GameObject::testCollision(GameObject &otherObject) {
     auto x_distance = static_cast<float>(std::abs(position.x - otherObject.getX()));
     auto y_distance = static_cast<float>(std::abs(position.y - otherObject.getY()));
 
+    //y_distance < getHeight()/3
+
     if(x_distance < getWidth()/2.4 + otherObject.getWidth()/2.4 && y_distance < getHeight()/2.4 + otherObject.getHeight()/2.4){
-        setRed();
-    } else{
-        setGreen();
+        handleCollision(otherObject);
     }
 }
 

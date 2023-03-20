@@ -24,6 +24,7 @@ public:
     void display(sf::RenderWindow& window) const;
 
     // managing collisions
+    inline ObjectType getType() const {return type;};
     virtual void testCollision(GameObject& otherObject);
     virtual void handleCollision(GameObject& otherObject);
     virtual void handleFloorTemp();
@@ -47,7 +48,7 @@ protected:
     sf::Vector2f velocity{};
     virtual void applyBehavior(float loopTime);
 
-    // collisions
+    // debug
     inline void setRed(){sprite.setColor(sf::Color::Red);};
     inline void setGreen(){sprite.setColor(sf::Color::Green);};
 
