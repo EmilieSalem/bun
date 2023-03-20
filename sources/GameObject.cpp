@@ -20,7 +20,7 @@ GameObject::GameObject(
 void GameObject::update(const float loopTime) {
     applyBehavior(loopTime);
     position += velocity * loopTime;
-    handleCollision();
+    handleFloorTemp();
     sprite.setPosition(position.x, position.y);
     updateRelatedObjects();
 }
@@ -55,8 +55,10 @@ void GameObject::testCollision(GameObject &otherObject) {
     }
 }
 
-void GameObject::handleCollision() {}
+void GameObject::handleFloorTemp() {}
 
 void GameObject::updateRelatedObjects() {}
 
 void GameObject::displayRelatedObjects(sf::RenderWindow &window) const {}
+
+void GameObject::handleCollision(GameObject &otherObject) {}

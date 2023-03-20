@@ -28,13 +28,16 @@ private:
     static constexpr float HORIZONTAL_ACCELERATION{350.f};
 
     // jumping physics
-    void handleCollision() override;
     bool isGrounded = true;
     float jumpForce{};
     float pressedTime{};
     static constexpr float MAX_JUMP_FORCE{3500.f};
     static constexpr float CHARGE_ACCELERATION_COEFF{1.4f};
     static constexpr float GRAVITY{5};
+
+    // collisions
+    void handleFloorTemp() override;
+    void handleCollision(GameObject& otherObject) override;
 
     // charge bar
     ChargeBar chargeBar{};

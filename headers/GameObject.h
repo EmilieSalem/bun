@@ -25,7 +25,8 @@ public:
 
     // managing collisions
     virtual void testCollision(GameObject& otherObject);
-    virtual void handleCollision();
+    virtual void handleCollision(GameObject& otherObject);
+    virtual void handleFloorTemp();
 
     // disabling copy
     GameObject(GameObject const& other) = delete;

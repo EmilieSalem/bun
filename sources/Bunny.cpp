@@ -49,13 +49,17 @@ void Bunny::applyBehavior(float loopTime) {
     }
 }
 
-void Bunny::handleCollision() {
+void Bunny::handleFloorTemp() {
     // TODO temporary code, needs to be changed
     if(position.y >= 1000){
         position.y = 1000;
         velocity.y = 0;
         isGrounded = true;
     }
+}
+
+void Bunny::handleCollision(GameObject &otherObject) {
+    GameObject::handleCollision(otherObject);
 }
 
 void Bunny::loadTexture(Bunny::BunnyStates bunnyState) {
