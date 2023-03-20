@@ -5,6 +5,7 @@ Bunny::Bunny() : GameObject(
         IDLE_BUNNY_PATH,
         sf::Vector2f(sf::VideoMode::getDesktopMode().width/2, sf::VideoMode::getDesktopMode().height/2),
         sf::Vector2f(2.5, 2.5)){
+    type = ObjectType::BUNNY;
 }
 
 void Bunny::applyBehavior(float loopTime) {

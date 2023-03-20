@@ -4,6 +4,8 @@
 #include <SFML/Graphics.hpp>
 #include "../headers/Utils.h"
 
+enum class ObjectType{BUNNY, PLATFORM, OTHER};
+
 class GameObject {
 public:
     // constructor
@@ -33,6 +35,7 @@ protected:
     sf::Vector2f scale{};
 
     // physics
+    ObjectType type{ObjectType::OTHER};
     sf::Vector2f position{};
     sf::Vector2f velocity{};
     virtual void applyBehavior(float loopTime);

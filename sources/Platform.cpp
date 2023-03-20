@@ -7,8 +7,8 @@ Platform::Platform(PlatformLevel p_platformLevel) : GameObject(
         PLATFORM_PATH,
         sf::Vector2f(Utils::getScreenWidth()/2, Utils::getScreenHeight()/2),
         sf::Vector2f(2.2, 2.2)),
-                                                    platformLevel{p_platformLevel}
-        {
+        platformLevel{p_platformLevel} {
+    type = ObjectType::PLATFORM;
     randomizePosition();
     sprite.setPosition(position);
 }
