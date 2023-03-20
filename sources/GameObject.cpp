@@ -1,4 +1,6 @@
 #include "../headers/GameObject.h"
+#include <cmath>
+#include <iostream>
 
 GameObject::GameObject(
         const std::string_view &assetPath,
@@ -40,7 +42,18 @@ void GameObject::display(sf::RenderWindow &window) const {
     displayRelatedObjects(window);
 }
 
-void GameObject::applyBehavior(const float loopTime) { }
+void GameObject::applyBehavior(const float loopTime) {}
+
+void GameObject::testCollision(GameObject &otherObject) {
+    auto x_distance = static_cast<float>(std::abs(position.x - otherObject.getX()));
+    auto y_distance = static_cast<float>(std::abs(position.y - otherObject.getY()));
+
+    if(x_distance < getWidth()/2.4 + otherObject.getWidth()/2.4 && y_distance < getHeight()/2.4 + otherObject.getHeight()/2.4){
+        setRed();
+    } else{
+        setGreen();
+    }
+}
 
 void GameObject::handleCollision() {}
 

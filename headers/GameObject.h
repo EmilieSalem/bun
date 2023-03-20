@@ -16,10 +16,16 @@ public:
                     );
 
     // managing position
+    inline float getX() const {return position.x;};
+    inline float getY() const {return position.y;};
     inline float getWidth() const {return sprite.getGlobalBounds().width;};
     inline float getHeight() const {return sprite.getGlobalBounds().height;};
     void update(float loopTime);
     void display(sf::RenderWindow& window) const;
+
+    // managing collisions
+    virtual void testCollision(GameObject& otherObject);
+    virtual void handleCollision();
 
     // disabling copy
     GameObject(GameObject const& other) = delete;
@@ -39,7 +45,10 @@ protected:
     sf::Vector2f position{};
     sf::Vector2f velocity{};
     virtual void applyBehavior(float loopTime);
-    virtual void handleCollision();
+
+    // collisions
+    inline void setRed(){sprite.setColor(sf::Color::Red);};
+    inline void setGreen(){sprite.setColor(sf::Color::Green);};
 
     // to display elements related to the GameObject, such as a ChargeBar
     virtual void updateRelatedObjects();

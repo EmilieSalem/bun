@@ -7,8 +7,8 @@
 int main() {
     auto bunny = Bunny();
     auto platform1 = Platform(Platform::PlatformLevel::LOW);
-    auto platform2 = Platform(Platform::PlatformLevel::MIDDLE);
-    auto platform3 = Platform(Platform::PlatformLevel::HIGH);
+    //auto platform2 = Platform(Platform::PlatformLevel::MIDDLE);
+    //auto platform3 = Platform(Platform::PlatformLevel::HIGH);
 
 
     sf::Clock chrono{};
@@ -27,9 +27,11 @@ int main() {
 
         bunny.update(loopTime);
 
+        bunny.testCollision(platform1);
+
         platform1.display(window);
-        platform2.display(window);
-        platform3.display(window);
+        //platform2.display(window);
+        //platform3.display(window);
 
         bunny.display(window);
 
