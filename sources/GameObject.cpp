@@ -26,7 +26,8 @@ void GameObject::update(const float loopTime) {
 }
 
 void GameObject::display(sf::RenderWindow &window) const {
-    auto directions = std::array<sf::Vector2f, 9>{
+    // TODO Reimplement duplication
+    /*auto directions = std::array<sf::Vector2f, 9>{
             sf::Vector2f{-1, 0},
             sf::Vector2f{0, 0},
             sf::Vector2f{1, 0},
@@ -38,7 +39,8 @@ void GameObject::display(sf::RenderWindow &window) const {
                 direction.y * Utils::getScreenHeight()
                 );
         window.draw(sprite, transformation);
-    }
+    }*/
+    window.draw(sprite);
     displayRelatedObjects(window);
 }
 

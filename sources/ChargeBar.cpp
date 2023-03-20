@@ -19,7 +19,7 @@ void ChargeBar::updateProgress(float percentage) {
 
 // TODO think of a better conception to share it with GameObject
 void ChargeBar::display(sf::RenderWindow &window) const {
-    auto directions = std::array<sf::Vector2f, 9>{
+    /*auto directions = std::array<sf::Vector2f, 9>{
             sf::Vector2f{-1, 0},
             sf::Vector2f{0, 0},
             sf::Vector2f{1, 0},
@@ -31,7 +31,8 @@ void ChargeBar::display(sf::RenderWindow &window) const {
                 direction.y * static_cast<float>(sf::VideoMode::getDesktopMode().height)
         );
         window.draw(bar, transformation);
-    }
+    }*/
+    window.draw(bar);
 }
 
 void ChargeBar::updatePosition(float referenceX, float referenceY) {

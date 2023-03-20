@@ -28,7 +28,7 @@ private:
     static constexpr int BAR_WIDTH = 17;
     static constexpr int BAR_HEIGHT = 50;
     static constexpr float X_AXIS_SHIFT = 70;
-    static constexpr float Y_AXIS_SHIFT = -50;
+    static constexpr float Y_AXIS_SHIFT = 0;
 };
 
 

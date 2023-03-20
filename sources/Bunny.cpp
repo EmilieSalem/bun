@@ -56,6 +56,14 @@ void Bunny::handleFloorTemp() {
         velocity.y = 0;
         isGrounded = true;
     }
+    if(position.x + getWidth()/2 >= Utils::getScreenWidth()){
+        position.x = Utils::getScreenWidth() - getWidth()/2;
+        velocity.x = 0;
+    }
+    if(position.x - getWidth()/2 <= 0){
+        position.x = getWidth()/2;
+        velocity.x = 0;
+    }
 }
 
 void Bunny::handleCollision(GameObject &otherObject) {
