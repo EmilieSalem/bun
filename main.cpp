@@ -6,7 +6,10 @@
 
 int main() {
     auto bunny = Bunny();
-    auto platform = Platform();
+    auto platform1 = Platform(Platform::PlatformLevel::LOW);
+    auto platform2 = Platform(Platform::PlatformLevel::MIDDLE);
+    auto platform3 = Platform(Platform::PlatformLevel::HIGH);
+
 
     sf::Clock chrono{};
 
@@ -23,7 +26,11 @@ int main() {
         window.clear(BEIGE);
 
         bunny.update(loopTime);
-        platform.display(window);
+
+        platform1.display(window);
+        platform2.display(window);
+        platform3.display(window);
+
         bunny.display(window);
 
         window.display();
