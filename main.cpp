@@ -3,6 +3,7 @@
 #include "headers/ColorPalette.h"
 #include "headers/Bunny.h"
 #include "headers/Platform.h"
+#include "headers/Carrot.h"
 
 int main() {
     auto gameObjects = std::vector<std::unique_ptr<GameObject>>{};
@@ -13,6 +14,8 @@ int main() {
     gameObjects.push_back(std::move(std::make_unique<Platform>(Platform::PlatformLevel::MIDDLE)));
     gameObjects.push_back(std::move(std::make_unique<Platform>(Platform::PlatformLevel::HIGH)));
     gameObjects.push_back(std::move(std::make_unique<Platform>(Platform::PlatformLevel::HIGH)));
+
+    gameObjects.push_back(std::move(std::make_unique<Carrot>()));
 
     gameObjects.push_back(std::move(std::make_unique<Bunny>()));
 
