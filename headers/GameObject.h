@@ -4,7 +4,7 @@
 #include <SFML/Graphics.hpp>
 #include "../headers/Utils.h"
 
-enum class ObjectType{BUNNY, PLATFORM, OTHER};
+enum class ObjectType{BUNNY, PLATFORM, CARROT, OTHER};
 
 class GameObject {
 public:
@@ -22,6 +22,9 @@ public:
     inline float getHeight() const {return sprite.getGlobalBounds().height;};
     void update(float loopTime);
     void display(sf::RenderWindow& window) const;
+
+    // remove an object from the game
+    void remove();
 
     // managing collisions
     inline ObjectType getType() const {return type;};
@@ -47,6 +50,9 @@ protected:
     sf::Vector2f position{};
     sf::Vector2f velocity{};
     virtual void applyBehavior(float loopTime);
+
+    // remove
+    virtual void onRemoval();
 
     // debug
     inline void setRed(){sprite.setColor(sf::Color::Red);};

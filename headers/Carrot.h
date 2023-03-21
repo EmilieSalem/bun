@@ -9,6 +9,8 @@ public:
     explicit Carrot();
 
 protected:
+    // behavior when picked up
+    void onRemoval() override;
 
 private:
     // appearance

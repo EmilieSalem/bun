@@ -66,17 +66,36 @@ void Bunny::handleFloorTemp() {
 }
 
 void Bunny::handleCollision(GameObject &otherObject) {
-    if(otherObject.getType() == ObjectType::PLATFORM){
-        /* The 3 conditions correspond to:
+    switch(otherObject.getType()){
+
+        case ObjectType::BUNNY:
+            break;
+
+        case ObjectType::PLATFORM:
+            /* The 3 conditions correspond to:
          * The bunny must be going downwards ( velocity.y >= 0.f )
          * The bunny must be above the platform ( position.y < otherObject.getY() )
          * The bunny must be low enough so that the collision doesn't create a rough "teleportation" ( position.y >= otherObject.getY() - otherObject.getHeight()/3 )
          */
-        if(velocity.y >= 0.f && position.y < otherObject.getY() && position.y >= otherObject.getY() - otherObject.getHeight()/3){
-            velocity.y = 0.f;
-            position.y = otherObject.getY() - otherObject.getHeight()/3; // bunny placed a bit lower for aesthetic purposes
-            isGrounded = true;
-        }
+            if(velocity.y >= 0.f && position.y < otherObject.getY() && position.y >= otherObject.getY() - otherObject.getHeight()/3){
+                velocity.y = 0.f;
+                position.y = otherObject.getY() - otherObject.getHeight()/3; // bunny placed a bit lower for aesthetic purposes
+                isGrounded = true;
+            }
+            break;
+
+        case ObjectType::CARROT:
+            // need the bunny to be much closer to the carrot before it disappears, otherwise it looks very jarring
+            // TODO write better code for this behavior
+            if(static_cast<float>(std::abs(position.x - otherObject.getX())) < getWidth()/5 + otherObject.getWidth()/5
+            && static_cast<float>(std::abs(position.y - otherObject.getY())) < getHeight()/5 + otherObject.getHeight()/5){
+                otherObject.remove();
+            }
+            break;
+
+        case ObjectType::OTHER:
+            break;
+
     }
 }
 
