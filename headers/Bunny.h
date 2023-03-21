@@ -25,14 +25,15 @@ private:
     void loadTexture(BunnyStates bunnyState);
 
     // left/right movement physics
-    static constexpr float HORIZONTAL_ACCELERATION{350.f};
+    static constexpr float HORIZONTAL_GROUND_ACCELERATION{350.f};
+    static constexpr float HORIZONTAL_JUMP_ACCELERATION{500.f};
 
     // jumping physics
     bool isGrounded = true;
     float jumpForce{};
     float pressedTime{};
-    static constexpr float MAX_JUMP_FORCE{3500.f};
-    static constexpr float CHARGE_ACCELERATION_COEFF{1.4f};
+    static constexpr float MAX_JUMP_FORCE{2000.f};
+    static constexpr float CHARGE_ACCELERATION_COEFF{1.8f};
     static constexpr float GRAVITY{5};
 
     // collisions

@@ -15,12 +15,14 @@ void Bunny::applyBehavior(float loopTime) {
 
     // right | blocked if charging
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right) && !sf::Keyboard::isKeyPressed(sf::Keyboard::Space)){
-        velocity.x += HORIZONTAL_ACCELERATION;
+        if(isGrounded) {velocity.x += HORIZONTAL_GROUND_ACCELERATION;}
+        else {velocity.x += HORIZONTAL_JUMP_ACCELERATION;};
     }
 
     // left | blocked if charging
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left) && !sf::Keyboard::isKeyPressed(sf::Keyboard::Space)){
-        velocity.x -= HORIZONTAL_ACCELERATION;
+        if(isGrounded) {velocity.x -= HORIZONTAL_GROUND_ACCELERATION;}
+        else {velocity.x -= HORIZONTAL_JUMP_ACCELERATION;};
     }
 
     // jump | only works if on the ground
@@ -40,9 +42,6 @@ void Bunny::applyBehavior(float loopTime) {
                 jumpForce = 0;
                 isGrounded = false;
                 chargeBar.updateProgress(0);
-                // horizontal direction of the jump
-                if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) velocity.x = HORIZONTAL_ACCELERATION;
-                if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) velocity.x = -HORIZONTAL_ACCELERATION;
             }
             pressedTime = 0;
         }
