@@ -49,3 +49,10 @@ void Platform::randomizePosition() {
     // generating and setting the randomized position
     position = sf::Vector2f(horizontalDistribution(generator), verticalDistribution(generator));
 }
+
+void Platform::handleCollision(GameObject &otherObject) {
+    if(otherObject.getType() == ObjectType::PLATFORM){ // if there is overlap with another platform
+        randomizePosition(); // generate a new position
+        sprite.setPosition(position);
+    }
+}

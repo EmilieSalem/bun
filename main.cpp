@@ -8,8 +8,12 @@ int main() {
     auto gameObjects = std::vector<std::unique_ptr<GameObject>>{};
 
     gameObjects.push_back(std::move(std::make_unique<Platform>(Platform::PlatformLevel::LOW)));
+    gameObjects.push_back(std::move(std::make_unique<Platform>(Platform::PlatformLevel::LOW)));
+    gameObjects.push_back(std::move(std::make_unique<Platform>(Platform::PlatformLevel::MIDDLE)));
     gameObjects.push_back(std::move(std::make_unique<Platform>(Platform::PlatformLevel::MIDDLE)));
     gameObjects.push_back(std::move(std::make_unique<Platform>(Platform::PlatformLevel::HIGH)));
+    gameObjects.push_back(std::move(std::make_unique<Platform>(Platform::PlatformLevel::HIGH)));
+
     gameObjects.push_back(std::move(std::make_unique<Bunny>()));
 
     sf::Clock chrono{};

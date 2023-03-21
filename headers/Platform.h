@@ -10,6 +10,8 @@ public:
     explicit Platform(PlatformLevel p_platformLevel);
 
 protected:
+    // manage platform overlap
+    void handleCollision(GameObject& otherObject) override;
 
 private:
     // appearance
