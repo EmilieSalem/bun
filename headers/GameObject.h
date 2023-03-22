@@ -25,6 +25,7 @@ public:
 
     // remove an object from the game
     void remove();
+    inline bool isRemoved() const {return removed;};
 
     // managing collisions
     inline ObjectType getType() const {return type;};
@@ -52,6 +53,7 @@ protected:
     virtual void applyBehavior(float loopTime);
 
     // remove
+    bool removed{false};
     virtual void onRemoval();
 
     // debug

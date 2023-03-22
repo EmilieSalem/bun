@@ -47,11 +47,13 @@ void GameObject::display(sf::RenderWindow &window) const {
 void GameObject::applyBehavior(const float loopTime) {}
 
 void GameObject::testCollision(GameObject &otherObject) {
-    auto x_distance = static_cast<float>(std::abs(position.x - otherObject.getX()));
-    auto y_distance = static_cast<float>(std::abs(position.y - otherObject.getY()));
+    if(!otherObject.isRemoved()){
+        auto x_distance = static_cast<float>(std::abs(position.x - otherObject.getX()));
+        auto y_distance = static_cast<float>(std::abs(position.y - otherObject.getY()));
 
-    if(x_distance < getWidth()/2.4 + otherObject.getWidth()/2.4 && y_distance < getHeight()/2.4 + otherObject.getHeight()/2.4){
-        handleCollision(otherObject);
+        if(x_distance < getWidth()/2.4 + otherObject.getWidth()/2.4 && y_distance < getHeight()/2.4 + otherObject.getHeight()/2.4){
+            handleCollision(otherObject);
+        }
     }
 }
 
@@ -68,5 +70,6 @@ void GameObject::onRemoval() {}
 void GameObject::remove() {
     scale = sf::Vector2f(0,0);
     sprite.setScale(scale);
+    removed = true;
     onRemoval();
 }
