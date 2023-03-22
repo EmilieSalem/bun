@@ -7,8 +7,19 @@
 
 int main() {
 
+    // score
     int score{0};
 
+    // score display
+    sf::Text scoreDisplay{};
+    sf::Font police{};
+    police.loadFromFile("../assets/Early_GameBoy.ttf");
+    scoreDisplay.setFont(police);
+    scoreDisplay.setCharacterSize(70);
+    scoreDisplay.setFillColor(BROWN);
+    scoreDisplay.setPosition(15, 15);
+
+    // game objects
     auto gameObjects = std::vector<std::unique_ptr<GameObject>>{};
 
     gameObjects.push_back(std::move(std::make_unique<Platform>(Platform::PlatformLevel::LOW)));
@@ -22,9 +33,12 @@ int main() {
 
     gameObjects.push_back(std::move(std::make_unique<Bunny>()));
 
+    // chrono
     sf::Clock chrono{};
 
+    // window
     sf::RenderWindow window{sf::VideoMode(), "bun", sf::Style::Fullscreen};
+
     while(window.isOpen()){
         auto event = sf::Event();
 
@@ -51,6 +65,9 @@ int main() {
         for(auto& gameObjects : gameObjects){
             gameObjects->display(window);
         }
+
+        scoreDisplay.setString("SCORE : " + std::to_string(score));
+        window.draw(scoreDisplay);
 
         window.display();
     }
