@@ -9,6 +9,9 @@ public:
     // constructor
     explicit Bunny();
 
+    // score management
+    inline int getScore(){return score;};
+
 protected:
     // bunny controls and physics
     void applyBehavior(float loopTime) override;
@@ -39,6 +42,10 @@ private:
     // collisions
     void handleFloorTemp() override;
     void handleCollision(GameObject& otherObject) override;
+
+    // score management
+    int score{};
+    inline void increaseScore(int value){score += value;};
 
     // charge bar
     ChargeBar chargeBar{};

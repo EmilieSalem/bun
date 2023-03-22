@@ -1,5 +1,6 @@
 #include <iostream>
 #include "../headers/Bunny.h"
+#include "../headers/Carrot.h"
 
 Bunny::Bunny() : GameObject(
         IDLE_BUNNY_PATH,
@@ -89,6 +90,7 @@ void Bunny::handleCollision(GameObject &otherObject) {
             // TODO write better code for this behavior
             if(static_cast<float>(std::abs(position.x - otherObject.getX())) < getWidth()/5 + otherObject.getWidth()/5
             && static_cast<float>(std::abs(position.y - otherObject.getY())) < getHeight()/5 + otherObject.getHeight()/5){
+                increaseScore(1);
                 otherObject.remove();
             }
             break;
