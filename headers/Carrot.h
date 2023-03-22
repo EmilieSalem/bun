@@ -6,7 +6,7 @@
 class Carrot : public GameObject{
 public:
     // constructor
-    explicit Carrot();
+    explicit Carrot(int& p_score);
 
 protected:
     // behavior when picked up
@@ -15,6 +15,12 @@ protected:
 private:
     // appearance
     static constexpr std::string_view CARROT_PATH{"../assets/carrot.png"};
+
+    // score management
+    int value{1};
+
+    // TODO make it a reference to the game
+    int& score;
 };
 
 
