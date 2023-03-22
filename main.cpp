@@ -11,13 +11,32 @@ int main() {
     int score{0};
 
     // score display
-    sf::Text scoreDisplay{};
+    sf::Text scoreDisplayFixed{};
+    sf::Text scoreDisplayVariable{};
+    sf::Sprite carrotSprite{};
+    sf::Texture carrotTexture{};
     sf::Font police{};
     police.loadFromFile("../assets/Early_GameBoy.ttf");
-    scoreDisplay.setFont(police);
-    scoreDisplay.setCharacterSize(70);
-    scoreDisplay.setFillColor(BROWN);
-    scoreDisplay.setPosition(15, 15);
+
+    // fixed part
+    scoreDisplayFixed.setFont(police);
+    scoreDisplayFixed.setCharacterSize(70);
+    scoreDisplayFixed.setFillColor(BROWN);
+    scoreDisplayFixed.setPosition(25, 25);
+    scoreDisplayFixed.setString("SCORE : ");
+
+    // carrot display
+    carrotTexture.loadFromFile("../assets/carrot.png");
+    carrotSprite.setTexture(carrotTexture);
+    carrotSprite.setScale(sf::Vector2f(2.5,2.5));
+    carrotSprite.setOrigin(carrotSprite.getLocalBounds().width / 2, 0);
+    carrotSprite.setPosition(25 + scoreDisplayFixed.getLocalBounds().width,15);
+
+    // variable part
+    scoreDisplayVariable.setFont(police);
+    scoreDisplayVariable.setCharacterSize(70);
+    scoreDisplayVariable.setFillColor(BROWN);
+    scoreDisplayVariable.setPosition(75 + carrotSprite.getLocalBounds().width + scoreDisplayFixed.getLocalBounds().width, 25);
 
     // game objects
     auto gameObjects = std::vector<std::unique_ptr<GameObject>>{};
@@ -62,12 +81,15 @@ int main() {
             }
         }
 
+        scoreDisplayVariable.setString(std::to_string(score));
+
+        window.draw(scoreDisplayFixed);
+        window.draw(carrotSprite);
+        window.draw(scoreDisplayVariable);
+
         for(auto& gameObjects : gameObjects){
             gameObjects->display(window);
         }
-
-        scoreDisplay.setString("SCORE : " + std::to_string(score));
-        window.draw(scoreDisplay);
 
         window.display();
     }
