@@ -8,7 +8,7 @@ class Carrot : public GameObject{
 public:
     // constructor
     explicit Carrot(int& p_score);
-    void setPosition(Platform* platform);
+    void setPosition(float platformX, float platFormY, float platformHeight);
 
 protected:
     // behavior when picked up

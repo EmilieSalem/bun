@@ -12,7 +12,7 @@ void Carrot::onRemoval() {
     score += value;
 }
 
-void Carrot::setPosition(Platform* platform) {
-    position = sf::Vector2f(platform->getX(), platform->getY() - platform->getHeight()/2.5f);
+void Carrot::setPosition(float platformX, float platFormY, float platformHeight) {
+    position = sf::Vector2f(platformX, platFormY - platformHeight/2);
     sprite.setPosition(position);
 }

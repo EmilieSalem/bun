@@ -38,26 +38,41 @@ int main() {
     scoreDisplayVariable.setFillColor(BROWN);
     scoreDisplayVariable.setPosition(75 + carrotSprite.getLocalBounds().width + scoreDisplayFixed.getLocalBounds().width, 25);
 
-    // game objects
+    // creating a list that stores game objects
     auto gameObjects = std::vector<std::unique_ptr<GameObject>>{};
 
-    // platform 1
-    std::unique_ptr<Platform> platform1 = std::make_unique<Platform>(Platform::PlatformLevel::LOW);
-    std::unique_ptr<Carrot> carrot1 = std::make_unique<Carrot>(score);
-    carrot1->setPosition(platform1.get());
-
-    gameObjects.push_back(std::move(platform1));
-    gameObjects.push_back(std::move(carrot1));
-
-    // CHECK FOR PLATFORM COLLISIONS BEFORE ADDING CARROTS
-
-    /*gameObjects.push_back(std::move(std::make_unique<Platform>(Platform::PlatformLevel::LOW)));
+    // adding platforms to the list
+    gameObjects.push_back(std::move(std::make_unique<Platform>(Platform::PlatformLevel::LOW)));
+    gameObjects.push_back(std::move(std::make_unique<Platform>(Platform::PlatformLevel::LOW)));
     gameObjects.push_back(std::move(std::make_unique<Platform>(Platform::PlatformLevel::MIDDLE)));
     gameObjects.push_back(std::move(std::make_unique<Platform>(Platform::PlatformLevel::MIDDLE)));
     gameObjects.push_back(std::move(std::make_unique<Platform>(Platform::PlatformLevel::HIGH)));
-    gameObjects.push_back(std::move(std::make_unique<Platform>(Platform::PlatformLevel::HIGH)));*/
+    gameObjects.push_back(std::move(std::make_unique<Platform>(Platform::PlatformLevel::HIGH)));
 
-    gameObjects.push_back(std::move(std::make_unique<Carrot>(score)));
+    // test collisions between platforms for a set number of loops
+    // the number is arbitrarily high to make sure all collisions have been handled before adding carrots
+    int constexpr NB_COLLISION_TESTS = 1000;
+
+    for(auto _{0u}; _       < NB_COLLISION_TESTS; ++_){
+        for(auto i{0u}; i<gameObjects.size(); ++i){
+            for(auto j{0u}; j<gameObjects.size(); ++j){
+                if(i != j){
+                    gameObjects[i]->testCollision(*gameObjects[j]);
+                }
+            }
+        }
+    }
+
+    // adding a carrot on top of each platform in the list of game objects
+    for(auto i{0u}; i<gameObjects.size(); ++i){
+        if(gameObjects[i]->getType() == ObjectType::PLATFORM){
+            std::unique_ptr<Carrot> carrot = std::make_unique<Carrot>(score);
+            carrot->setPosition(gameObjects[i]->getX(), gameObjects[i]->getY(), gameObjects[i]->getHeight());
+            gameObjects.push_back(std::move(carrot));
+        }
+    }
+
+    // adding the bunny
     gameObjects.push_back(std::move(std::make_unique<Bunny>()));
 
     // chrono
