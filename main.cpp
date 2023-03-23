@@ -41,15 +41,23 @@ int main() {
     // game objects
     auto gameObjects = std::vector<std::unique_ptr<GameObject>>{};
 
-    gameObjects.push_back(std::move(std::make_unique<Platform>(Platform::PlatformLevel::LOW)));
-    gameObjects.push_back(std::move(std::make_unique<Platform>(Platform::PlatformLevel::LOW)));
+    // platform 1
+    std::unique_ptr<Platform> platform1 = std::make_unique<Platform>(Platform::PlatformLevel::LOW);
+    std::unique_ptr<Carrot> carrot1 = std::make_unique<Carrot>(score);
+    carrot1->setPosition(platform1.get());
+
+    gameObjects.push_back(std::move(platform1));
+    gameObjects.push_back(std::move(carrot1));
+
+    // CHECK FOR PLATFORM COLLISIONS BEFORE ADDING CARROTS
+
+    /*gameObjects.push_back(std::move(std::make_unique<Platform>(Platform::PlatformLevel::LOW)));
     gameObjects.push_back(std::move(std::make_unique<Platform>(Platform::PlatformLevel::MIDDLE)));
     gameObjects.push_back(std::move(std::make_unique<Platform>(Platform::PlatformLevel::MIDDLE)));
     gameObjects.push_back(std::move(std::make_unique<Platform>(Platform::PlatformLevel::HIGH)));
-    gameObjects.push_back(std::move(std::make_unique<Platform>(Platform::PlatformLevel::HIGH)));
+    gameObjects.push_back(std::move(std::make_unique<Platform>(Platform::PlatformLevel::HIGH)));*/
 
     gameObjects.push_back(std::move(std::make_unique<Carrot>(score)));
-
     gameObjects.push_back(std::move(std::make_unique<Bunny>()));
 
     // chrono

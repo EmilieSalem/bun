@@ -11,3 +11,8 @@ Carrot::Carrot(int& p_score) : GameObject(
 void Carrot::onRemoval() {
     score += value;
 }
+
+void Carrot::setPosition(Platform* platform) {
+    position = sf::Vector2f(platform->getX(), platform->getY() - platform->getHeight()/2.5f);
+    sprite.setPosition(position);
+}

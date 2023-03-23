@@ -2,11 +2,13 @@
 #define BUN_CARROT_H
 
 #include "GameObject.h"
+#include "Platform.h"
 
 class Carrot : public GameObject{
 public:
     // constructor
     explicit Carrot(int& p_score);
+    void setPosition(Platform* platform);
 
 protected:
     // behavior when picked up
