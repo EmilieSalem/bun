@@ -1,6 +1,5 @@
 #include <iostream>
 #include "../headers/Bunny.h"
-#include "../headers/Carrot.h"
 
 Bunny::Bunny(sf::Vector2f p_initialPosition) : GameObject(
         IDLE_BUNNY_PATH,
@@ -17,13 +16,13 @@ void Bunny::applyBehavior(float loopTime) {
     // right | blocked if charging
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right) && !sf::Keyboard::isKeyPressed(sf::Keyboard::Space)){
         if(isGrounded) {velocity.x += HORIZONTAL_GROUND_ACCELERATION;}
-        else {velocity.x += HORIZONTAL_JUMP_ACCELERATION;};
+        else {velocity.x += HORIZONTAL_JUMP_ACCELERATION;}
     }
 
     // left | blocked if charging
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left) && !sf::Keyboard::isKeyPressed(sf::Keyboard::Space)){
         if(isGrounded) {velocity.x -= HORIZONTAL_GROUND_ACCELERATION;}
-        else {velocity.x -= HORIZONTAL_JUMP_ACCELERATION;};
+        else {velocity.x -= HORIZONTAL_JUMP_ACCELERATION;}
     }
 
     // jump | only works if on the ground
@@ -49,12 +48,9 @@ void Bunny::applyBehavior(float loopTime) {
     }
 }
 
-void Bunny::handleFloorTemp() {
-    // TODO temporary code, needs to be changed
-    if(position.y >= 1000){
-        position.y = 1000;
-        velocity.y = 0;
-        isGrounded = true;
+void Bunny::manageScreenLimits() {
+    if(position.y >= Utils::getScreenHeight() + getHeight()){
+        remove();
     }
     if(position.x + getWidth()/2 >= Utils::getScreenWidth()){
         position.x = Utils::getScreenWidth() - getWidth()/2;

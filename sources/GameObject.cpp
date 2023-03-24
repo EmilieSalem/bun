@@ -20,7 +20,7 @@ GameObject::GameObject(
 void GameObject::update(const float loopTime) {
     applyBehavior(loopTime);
     position += velocity * loopTime;
-    handleFloorTemp();
+    manageScreenLimits();
     sprite.setPosition(position.x, position.y);
     updateRelatedObjects();
 }
@@ -57,7 +57,7 @@ void GameObject::testCollision(GameObject &otherObject) {
     }
 }
 
-void GameObject::handleFloorTemp() {}
+void GameObject::manageScreenLimits() {}
 
 void GameObject::updateRelatedObjects() {}
 

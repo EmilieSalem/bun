@@ -31,7 +31,7 @@ public:
     inline ObjectType getType() const {return type;};
     virtual void testCollision(GameObject& otherObject);
     virtual void handleCollision(GameObject& otherObject);
-    virtual void handleFloorTemp();
+    virtual void manageScreenLimits();
 
     // disabling copy
     GameObject(GameObject const& other) = delete;

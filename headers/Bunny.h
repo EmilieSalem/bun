@@ -37,7 +37,7 @@ private:
     static constexpr float GRAVITY{5};
 
     // collisions
-    void handleFloorTemp() override;
+    void manageScreenLimits() override;
     void handleCollision(GameObject& otherObject) override;
 
     // charge bar
