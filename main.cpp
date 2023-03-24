@@ -1,5 +1,4 @@
-#include <iostream>
-#include <SFML/Graphics.hpp>
+ #include <SFML/Graphics.hpp>
 #include "headers/ColorPalette.h"
 #include "headers/ObjectManager.h"
 #include "headers/UIManager.h"
@@ -32,5 +31,7 @@ int main() {
         objectManager.display(window);
 
         window.display();
+
+        objectManager.clearAndGenerate();
     }
 }

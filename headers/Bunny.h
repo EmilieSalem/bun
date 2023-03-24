@@ -2,12 +2,13 @@
 #define BUN_BUNNY_H
 #include "GameObject.h"
 #include "ChargeBar.h"
+#include "ObjectManager.h"
 
 class Bunny : public GameObject {
 
 public:
     // constructor
-    explicit Bunny(sf::Vector2f p_initialPosition);
+    explicit Bunny(sf::Vector2f p_initialPosition, ObjectManager &p_objectManager);
 
 protected:
     // bunny controls and physics
@@ -42,6 +43,9 @@ private:
 
     // charge bar
     ChargeBar chargeBar{};
+
+    // to handle falling down
+    ObjectManager &objectManager;
 };
 
 

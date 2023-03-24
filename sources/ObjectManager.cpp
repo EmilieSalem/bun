@@ -55,7 +55,11 @@ void ObjectManager::generateCarrots() {
 
 void ObjectManager::generateBunny() {
     sf::Vector2f initialPosition{gameObjects[0]->getX(), gameObjects[0]->getY() - gameObjects[0]->getHeight()/3};
-    addObject(std::make_unique<Bunny>(initialPosition));
+    addObject(std::make_unique<Bunny>(initialPosition, *this));
+}
+
+void ObjectManager::generateBunny(sf::Vector2f initialPosition) {
+    addObject(std::make_unique<Bunny>(initialPosition, *this));
 }
 
 void ObjectManager::update() {
@@ -91,4 +95,19 @@ bool ObjectManager::noMoreCarrots() {
     return true;
 }
 
+void ObjectManager::generateNewScreen(sf::Vector2f initialBunnyPosition) {
+    toClear = true;
+    bunnyStartPosition = initialBunnyPosition;
+}
+
+void ObjectManager::clearAndGenerate() {
+    if(toClear){
+        gameObjects.clear();
+        generatePlatforms();
+        checkPlatformValidity();
+        generateCarrots();
+        generateBunny(bunnyStartPosition);
+        toClear = false;
+    }
+}
 

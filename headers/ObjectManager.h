@@ -12,6 +12,10 @@ public :
     // initialization
     void initializeGame();
 
+    // new screen
+    void generateNewScreen(sf::Vector2f initialBunnyPosition);
+    void clearAndGenerate();
+
     // loop behavior
     void update();
     void handleCollisions();
@@ -34,11 +38,15 @@ private :
     void generateCarrots();
     void checkPlatformValidity();
     void generateBunny();
+    void generateBunny(sf::Vector2f initialPosition);
     int static constexpr NB_COLLISION_TESTS{1000};
 
     // game loops
     sf::Clock chrono{};
-};
 
+    // clear
+    bool toClear{false};
+    sf::Vector2f bunnyStartPosition{};
+};
 
 #endif //BUN_OBJECTMANAGER_H
