@@ -2,9 +2,39 @@
 #define BUN_OBJECTMANAGER_H
 
 
+#include "GameObject.h"
+
 class ObjectManager {
 public :
+    // constructor
+    ObjectManager();
+
+    // initialization
+    void initializeGame();
+
+    // loop behavior
+    void update();
+    void handleCollisions();
+    void display(sf::RenderWindow &window);
+
+    inline int getScore() const{return score;};
+
+
 private :
+    // objects
+    std::vector<std::unique_ptr<GameObject>> gameObjects{};
+    int score{0};
+    void addObject(std::unique_ptr<GameObject> object);
+
+    // initialization
+    void generatePlatforms();
+    void generateCarrots();
+    void checkPlatformValidity();
+    void generateBunny();
+    int static constexpr NB_COLLISION_TESTS{1000};
+
+    // game loops
+    sf::Clock chrono{};
 };
 
 

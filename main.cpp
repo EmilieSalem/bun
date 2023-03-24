@@ -4,12 +4,9 @@
 #include "headers/Bunny.h"
 #include "headers/Platform.h"
 #include "headers/Carrot.h"
+#include "headers/ObjectManager.h"
 
 int main() {
-
-    // score
-    int score{0};
-
     // score display
     sf::Text scoreDisplayFixed{};
     sf::Text scoreDisplayVariable{};
@@ -38,48 +35,11 @@ int main() {
     scoreDisplayVariable.setFillColor(BROWN);
     scoreDisplayVariable.setPosition(75 + carrotSprite.getLocalBounds().width + scoreDisplayFixed.getLocalBounds().width, 25);
 
-    // creating a list that stores game objects
-    auto gameObjects = std::vector<std::unique_ptr<GameObject>>{};
-
-    // adding platforms to the list
-    gameObjects.push_back(std::move(std::make_unique<Platform>(Platform::PlatformLevel::LOW)));
-    gameObjects.push_back(std::move(std::make_unique<Platform>(Platform::PlatformLevel::LOW)));
-    gameObjects.push_back(std::move(std::make_unique<Platform>(Platform::PlatformLevel::MIDDLE)));
-    gameObjects.push_back(std::move(std::make_unique<Platform>(Platform::PlatformLevel::MIDDLE)));
-    gameObjects.push_back(std::move(std::make_unique<Platform>(Platform::PlatformLevel::HIGH)));
-    gameObjects.push_back(std::move(std::make_unique<Platform>(Platform::PlatformLevel::HIGH)));
-
-    // test collisions between platforms for a set number of loops
-    // the number is arbitrarily high to make sure all collisions have been handled before adding carrots
-    int constexpr NB_COLLISION_TESTS = 1000;
-
-    for(auto _{0u}; _       < NB_COLLISION_TESTS; ++_){
-        for(auto i{0u}; i<gameObjects.size(); ++i){
-            for(auto j{0u}; j<gameObjects.size(); ++j){
-                if(i != j){
-                    gameObjects[i]->testCollision(*gameObjects[j]);
-                }
-            }
-        }
-    }
-
-    // adding a carrot on top of each platform in the list of game objects
-    for(auto i{0u}; i<gameObjects.size(); ++i){
-        if(gameObjects[i]->getType() == ObjectType::PLATFORM){
-            std::unique_ptr<Carrot> carrot = std::make_unique<Carrot>(score);
-            carrot->setPosition(gameObjects[i]->getX(), gameObjects[i]->getY(), gameObjects[i]->getHeight());
-            gameObjects.push_back(std::move(carrot));
-        }
-    }
-
-    // adding the bunny
-    gameObjects.push_back(std::move(std::make_unique<Bunny>()));
-
-    // chrono
-    sf::Clock chrono{};
-
     // window
     sf::RenderWindow window{sf::VideoMode(), "bun", sf::Style::Fullscreen};
+
+    ObjectManager objectManager{};
+    objectManager.initializeGame();
 
     while(window.isOpen()){
         auto event = sf::Event();
@@ -88,31 +48,18 @@ int main() {
             if(event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape) window.close();
         }
 
-        auto loopTime = chrono.restart().asSeconds();
-
         window.clear(BEIGE);
 
-        for(auto& gameObject : gameObjects){
-            gameObject->update(loopTime);
-        }
+        objectManager.update();
+        objectManager.handleCollisions();
 
-        for(auto i{0u}; i<gameObjects.size(); ++i){
-            for(auto j{0u}; j<gameObjects.size(); ++j){
-                if(i != j){
-                    gameObjects[i]->testCollision(*gameObjects[j]);
-                }
-            }
-        }
-
-        scoreDisplayVariable.setString(std::to_string(score));
+        scoreDisplayVariable.setString(std::to_string(objectManager.getScore()));
 
         window.draw(scoreDisplayFixed);
         window.draw(carrotSprite);
         window.draw(scoreDisplayVariable);
 
-        for(auto& gameObjects : gameObjects){
-            gameObjects->display(window);
-        }
+        objectManager.display(window);
 
         window.display();
     }
