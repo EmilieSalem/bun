@@ -22,6 +22,7 @@ void ObjectManager::generatePlatforms() {
     addObject(std::make_unique<Platform>(Platform::PlatformLevel::LOW));
     addObject(std::make_unique<Platform>(Platform::PlatformLevel::MIDDLE));
     addObject(std::make_unique<Platform>(Platform::PlatformLevel::MIDDLE));
+    addObject(std::make_unique<Platform>(Platform::PlatformLevel::MIDDLE));
     addObject(std::make_unique<Platform>(Platform::PlatformLevel::HIGH));
     addObject(std::make_unique<Platform>(Platform::PlatformLevel::HIGH));
 }
