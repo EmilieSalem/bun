@@ -46,6 +46,14 @@ void UIManager::display(sf::RenderWindow &window, bool withNextLevelCue) {
     window.draw(carrotSprite);
     window.draw(scoreDisplayVariable);
     if(withNextLevelCue){
-        window.draw(nextLevelCue);
+        auto loopTime = chrono.restart().asSeconds();
+        elapsedTime += loopTime;
+        if(elapsedTime > FLICKER_TIME){ // makes the text appear/disappear after a set interval of time
+            elapsedTime = 0;
+            toggleCue();
+        }
+        if(cueVisible){
+            window.draw(nextLevelCue);
+        }
     }
 }

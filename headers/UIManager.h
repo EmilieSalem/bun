@@ -37,6 +37,13 @@ private:
     // next level cue
     sf::Text nextLevelCue{};
     static constexpr std::string_view NEXT_LEVEL_CUE_STRING{"CARROTS HERE!"};
+
+    // to make the cue flicker
+    bool cueVisible{true};
+    sf::Clock chrono{};
+    float elapsedTime{};
+    static constexpr float FLICKER_TIME = 0.6f;
+    inline void toggleCue(){cueVisible = !cueVisible;};
 };
 
 
