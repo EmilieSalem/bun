@@ -26,7 +26,7 @@ public :
 private :
     // objects
     std::vector<std::unique_ptr<GameObject>> gameObjects{};
-    int score{0};
+    int score{-1};
     void addObject(std::unique_ptr<GameObject> object);
 
     // initialization
