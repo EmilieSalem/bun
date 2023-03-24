@@ -34,7 +34,7 @@ UIManager::UIManager() {
     nextLevelCue.setFillColor(FONT_COLOR);
     nextLevelCue.setString(NEXT_LEVEL_CUE_STRING.data());
     nextLevelCue.setOrigin(nextLevelCue.getLocalBounds().width/2, nextLevelCue.getLocalBounds().height);
-    nextLevelCue.setPosition(Utils::getScreenWidth()/2, Utils::getScreenHeight() - DISTANCE_TO_BORDER);
+    nextLevelCue.setPosition(Utils::getScreenWidth()/2, Utils::getScreenHeight() - DISTANCE_TO_BORDER*1.5f);
 }
 
 void UIManager::updateScoreDisplay(int score) {
