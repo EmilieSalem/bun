@@ -53,7 +53,8 @@ void ObjectManager::generateCarrots() {
 
 
 void ObjectManager::generateBunny() {
-    addObject(std::make_unique<Bunny>());
+    sf::Vector2f initialPosition{gameObjects[0]->getX(), gameObjects[0]->getY() - gameObjects[0]->getHeight()/3};
+    addObject(std::make_unique<Bunny>(initialPosition));
 }
 
 void ObjectManager::update() {

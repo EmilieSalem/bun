@@ -7,7 +7,7 @@ class Bunny : public GameObject {
 
 public:
     // constructor
-    explicit Bunny();
+    explicit Bunny(sf::Vector2f p_initialPosition);
 
 protected:
     // bunny controls and physics

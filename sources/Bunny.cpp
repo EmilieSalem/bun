@@ -2,9 +2,9 @@
 #include "../headers/Bunny.h"
 #include "../headers/Carrot.h"
 
-Bunny::Bunny() : GameObject(
+Bunny::Bunny(sf::Vector2f p_initialPosition) : GameObject(
         IDLE_BUNNY_PATH,
-        sf::Vector2f(sf::VideoMode::getDesktopMode().width/2, sf::VideoMode::getDesktopMode().height/2),
+        p_initialPosition,
         sf::Vector2f(2.5, 2.5)){
     type = ObjectType::BUNNY;
 }
