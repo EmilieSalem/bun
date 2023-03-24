@@ -81,5 +81,14 @@ void ObjectManager::display(sf::RenderWindow &window) {
     }
 }
 
+bool ObjectManager::noMoreCarrots() {
+    bool carrotsInTheLevel = true;
+    for(auto i{0u}; i<gameObjects.size(); ++i){
+        if(gameObjects[i]->getType() == ObjectType::CARROT){
+            if(!gameObjects[i]->isRemoved()) return false;
+        }
+    }
+    return true;
+}
 
 

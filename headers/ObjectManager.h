@@ -17,8 +17,11 @@ public :
     void handleCollisions();
     void display(sf::RenderWindow &window);
 
+    // score
     inline int getScore() const{return score;};
 
+    // level state
+    bool noMoreCarrots();
 
 private :
     // objects
