@@ -1,45 +1,19 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
 #include "headers/ColorPalette.h"
-#include "headers/Bunny.h"
-#include "headers/Platform.h"
-#include "headers/Carrot.h"
 #include "headers/ObjectManager.h"
+#include "headers/UIManager.h"
 
 int main() {
-    // score display
-    sf::Text scoreDisplayFixed{};
-    sf::Text scoreDisplayVariable{};
-    sf::Sprite carrotSprite{};
-    sf::Texture carrotTexture{};
-    sf::Font police{};
-    police.loadFromFile("../assets/Early_GameBoy.ttf");
-
-    // fixed part
-    scoreDisplayFixed.setFont(police);
-    scoreDisplayFixed.setCharacterSize(70);
-    scoreDisplayFixed.setFillColor(BROWN);
-    scoreDisplayFixed.setPosition(25, 25);
-    scoreDisplayFixed.setString("SCORE : ");
-
-    // carrot display
-    carrotTexture.loadFromFile("../assets/carrot.png");
-    carrotSprite.setTexture(carrotTexture);
-    carrotSprite.setScale(sf::Vector2f(2.5,2.5));
-    carrotSprite.setOrigin(carrotSprite.getLocalBounds().width / 2, 0);
-    carrotSprite.setPosition(25 + scoreDisplayFixed.getLocalBounds().width,15);
-
-    // variable part
-    scoreDisplayVariable.setFont(police);
-    scoreDisplayVariable.setCharacterSize(70);
-    scoreDisplayVariable.setFillColor(BROWN);
-    scoreDisplayVariable.setPosition(75 + carrotSprite.getLocalBounds().width + scoreDisplayFixed.getLocalBounds().width, 25);
-
     // window
     sf::RenderWindow window{sf::VideoMode(), "bun", sf::Style::Fullscreen};
 
+    // objects
     ObjectManager objectManager{};
     objectManager.initializeGame();
+
+    // UI
+    UIManager uiManager{};
 
     while(window.isOpen()){
         auto event = sf::Event();
@@ -52,13 +26,9 @@ int main() {
 
         objectManager.update();
         objectManager.handleCollisions();
+        uiManager.updateScoreDisplay(objectManager.getScore());
 
-        scoreDisplayVariable.setString(std::to_string(objectManager.getScore()));
-
-        window.draw(scoreDisplayFixed);
-        window.draw(carrotSprite);
-        window.draw(scoreDisplayVariable);
-
+        uiManager.display(window);
         objectManager.display(window);
 
         window.display();
