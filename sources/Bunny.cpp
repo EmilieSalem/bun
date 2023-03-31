@@ -1,11 +1,12 @@
 #include <iostream>
 #include "../headers/Bunny.h"
 
-Bunny::Bunny(sf::Vector2f p_initialPosition, ObjectManager &p_objectManager) : GameObject(
+Bunny::Bunny(sf::Vector2f p_initialPosition, ObjectManager &p_objectManager, sf::Vector2f p_initialVelocity) : GameObject(
         IDLE_BUNNY_PATH,
         p_initialPosition,
         sf::Vector2f(2.5, 2.5)), objectManager{p_objectManager}{
     type = ObjectType::BUNNY;
+    velocity = p_initialVelocity;
 }
 
 void Bunny::applyBehavior(float loopTime) {
@@ -61,8 +62,8 @@ void Bunny::manageScreenLimits() {
 
     // bottom
     if(position.y >= Utils::getScreenHeight() + getHeight()){
-        sf::Vector2f newPosition = sf::Vector2f{position.x, position.y-Utils::getScreenHeight() - getHeight()*2};
-        objectManager.generateNewScreen(newPosition);
+        sf::Vector2f newPosition = sf::Vector2f{position.x, position.y-Utils::getScreenHeight() - getHeight()};
+        objectManager.generateNewScreen(newPosition, velocity);
     }
 }
 

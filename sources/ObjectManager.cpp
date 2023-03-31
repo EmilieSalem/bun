@@ -58,8 +58,8 @@ void ObjectManager::generateBunny() {
     addObject(std::make_unique<Bunny>(initialPosition, *this));
 }
 
-void ObjectManager::generateBunny(sf::Vector2f initialPosition) {
-    addObject(std::make_unique<Bunny>(initialPosition, *this));
+void ObjectManager::generateBunny(sf::Vector2f initialPosition, sf::Vector2f initialVelocity) {
+    addObject(std::make_unique<Bunny>(initialPosition, *this, initialVelocity));
 }
 
 void ObjectManager::update() {
@@ -95,9 +95,10 @@ bool ObjectManager::noMoreCarrots() {
     return true;
 }
 
-void ObjectManager::generateNewScreen(sf::Vector2f initialBunnyPosition) {
+void ObjectManager::generateNewScreen(sf::Vector2f initialBunnyPosition, sf::Vector2f initialBunnyVelocity) {
     toClear = true;
     bunnyStartPosition = initialBunnyPosition;
+    bunnyStartVelocity = initialBunnyVelocity;
 }
 
 void ObjectManager::clearAndGenerate() {
@@ -106,7 +107,7 @@ void ObjectManager::clearAndGenerate() {
         generatePlatforms();
         checkPlatformValidity();
         generateCarrots();
-        generateBunny(bunnyStartPosition);
+        generateBunny(bunnyStartPosition, bunnyStartVelocity);
         toClear = false;
     }
 }

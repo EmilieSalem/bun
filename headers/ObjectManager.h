@@ -13,7 +13,7 @@ public :
     void initializeGame();
 
     // new screen
-    void generateNewScreen(sf::Vector2f initialBunnyPosition);
+    void generateNewScreen(sf::Vector2f initialBunnyPosition, sf::Vector2f initialBunnyVelocity);
     void clearAndGenerate();
 
     // loop behavior
@@ -38,7 +38,7 @@ private :
     void generateCarrots();
     void checkPlatformValidity();
     void generateBunny();
-    void generateBunny(sf::Vector2f initialPosition);
+    void generateBunny(sf::Vector2f initialPosition, sf::Vector2f initialVelocity = sf::Vector2f(0,0));
     int static constexpr NB_COLLISION_TESTS{1000};
 
     // game loops
@@ -47,6 +47,7 @@ private :
     // clear
     bool toClear{false};
     sf::Vector2f bunnyStartPosition{};
+    sf::Vector2f bunnyStartVelocity{};
 };
 
 #endif //BUN_OBJECTMANAGER_H
