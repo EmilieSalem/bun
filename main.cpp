@@ -27,7 +27,7 @@ int main() {
         objectManager.handleCollisionsInCurrentScreen();
         uiManager.updateScoreDisplay(objectManager.getScore());
 
-        uiManager.display(window, objectManager.noMoreCarrotsInCurrentScreen(), objectManager.gameIsOver());
+        uiManager.display(window, objectManager.noMoreCarrotsInCurrentScreen(), objectManager.gameIsOver(), objectManager.gameIsWon());
         objectManager.displayCurrentScreen(window);
 
         window.display();

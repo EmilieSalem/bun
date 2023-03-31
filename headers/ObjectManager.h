@@ -29,9 +29,10 @@ public :
     // level state
     bool noMoreCarrotsInCurrentScreen();
 
-    // losing
+    // lose/win condition
     void gameOver();
     inline bool gameIsOver(){return hasLost;};
+    inline bool gameIsWon(){return score == SCORE_TO_WIN;};
 
 private :
     // objects
@@ -64,8 +65,9 @@ private :
     sf::Vector2f bunnyStartPosition{};
     sf::Vector2f bunnyStartVelocity{};
 
-    // losing condition
+    // win/lose condition
     bool hasLost{false};
+    static int constexpr SCORE_TO_WIN = 25;
 };
 
 #endif //BUN_OBJECTMANAGER_H

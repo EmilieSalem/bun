@@ -191,7 +191,7 @@ void ObjectManager::updateScreen() {
         toChange = false;
     }
 
-    if(hasLost){
+    if(gameIsOver() || gameIsWon()){
         gameObjectsUpperScreen.clear();
         gameObjectsLowerScreen.clear();
     }

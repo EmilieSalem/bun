@@ -8,7 +8,7 @@ class UIManager {
 public:
     UIManager();
     void updateScoreDisplay(int score);
-    void display(sf::RenderWindow &window, bool withNextLevelCue, bool gameIsOver);
+    void display(sf::RenderWindow &window, bool withNextLevelCue, bool gameIsOver, bool gameIsWon);
 
 private:
     // score display
@@ -49,6 +49,10 @@ private:
     // losing message
     sf::Text losingMessage{};
     static constexpr std::string_view LOSING_MESSAGE_STRING{"GAME OVER"};
+
+    // winning message
+    sf::Text winningMessage{};
+    static constexpr std::string_view WINNING_MESSAGE_STRING{"YOU WON!"};
 };
 
 
