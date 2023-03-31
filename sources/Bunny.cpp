@@ -63,13 +63,21 @@ void Bunny::manageScreenLimits() {
     // bottom
     if(position.y >= Utils::getScreenHeight() + getHeight()){
         sf::Vector2f newPosition = sf::Vector2f{position.x, position.y-Utils::getScreenHeight() - getHeight()};
-        objectManager.generateNewScreen(newPosition, velocity);
+        if(objectManager.isInLowerScreen()){ // loses the game
+            std::cout << "END OF THE GAME" << std::endl;
+        } else { // goes to lower screen
+            objectManager.changeScreen(newPosition, velocity);
+        }
     }
 
     // top
     if(position.y <= 0 - getHeight()){
         sf::Vector2f newPosition = sf::Vector2f{position.x, position.y+Utils::getScreenHeight() + getHeight()};
-        objectManager.generateNewScreen(newPosition, velocity);
+        if(objectManager.isInLowerScreen()){ // goes to upper screen
+            objectManager.changeScreen(newPosition, velocity);
+        } else { // // create new screen
+            objectManager.generateNewScreen(newPosition, velocity);
+        }
     }
 }
 

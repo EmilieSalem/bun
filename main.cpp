@@ -23,15 +23,15 @@ int main() {
 
         window.clear(BEIGE);
 
-        objectManager.update();
-        objectManager.handleCollisions();
+        objectManager.updateCurrentScreen();
+        objectManager.handleCollisionsInCurrentScreen();
         uiManager.updateScoreDisplay(objectManager.getScore());
 
-        uiManager.display(window, objectManager.noMoreCarrots());
-        objectManager.display(window);
+        uiManager.display(window, objectManager.noMoreCarrotsInCurrentScreen());
+        objectManager.displayCurrentScreen(window);
 
         window.display();
 
-        objectManager.clearAndGenerate();
+        objectManager.updateScreen();
     }
 }
