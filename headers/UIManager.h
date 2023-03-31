@@ -36,7 +36,7 @@ private:
 
     // next level cue
     sf::Text nextLevelCue{};
-    static constexpr std::string_view NEXT_LEVEL_CUE_STRING{"CARROTS HERE!"};
+    static constexpr std::string_view NEXT_LEVEL_CUE_STRING{"UP HERE!"};
 
     // to make the cue flicker
     bool cueVisible{true};
