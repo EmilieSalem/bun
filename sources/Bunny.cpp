@@ -64,7 +64,7 @@ void Bunny::manageScreenLimits() {
     if(position.y >= Utils::getScreenHeight() + getHeight()){
         sf::Vector2f newPosition = sf::Vector2f{position.x, position.y-Utils::getScreenHeight() - getHeight()};
         if(objectManager.isInLowerScreen()){ // loses the game
-            std::cout << "END OF THE GAME" << std::endl;
+            objectManager.gameOver();
         } else { // goes to lower screen
             objectManager.changeScreen(newPosition, velocity);
         }

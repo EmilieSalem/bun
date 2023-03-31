@@ -29,6 +29,10 @@ public :
     // level state
     bool noMoreCarrotsInCurrentScreen();
 
+    // losing
+    void gameOver();
+    inline bool gameIsOver(){return hasLost;};
+
 private :
     // objects
     std::vector<std::unique_ptr<GameObject>> gameObjectsLowerScreen{};
@@ -59,6 +63,9 @@ private :
     bool toChange{false};
     sf::Vector2f bunnyStartPosition{};
     sf::Vector2f bunnyStartVelocity{};
+
+    // losing condition
+    bool hasLost{false};
 };
 
 #endif //BUN_OBJECTMANAGER_H

@@ -8,7 +8,7 @@ class UIManager {
 public:
     UIManager();
     void updateScoreDisplay(int score);
-    void display(sf::RenderWindow &window, bool withNextLevelCue);
+    void display(sf::RenderWindow &window, bool withNextLevelCue, bool gameIsOver);
 
 private:
     // score display
@@ -22,7 +22,8 @@ private:
     static constexpr std::string_view FONT_PATH{"../assets/Early_GameBoy.ttf"};
 
     // text
-    static int constexpr FONT_SIZE_BIG{70};
+    static int constexpr FONT_SIZE_BIG{100};
+    static int constexpr FONT_SIZE_MEDIUM{70};
     static int constexpr FONT_SIZE_SMALL{45};
     static const sf::Color FONT_COLOR;
     static constexpr float DISTANCE_TO_BORDER{25};
@@ -44,6 +45,10 @@ private:
     float elapsedTime{};
     static constexpr float FLICKER_TIME = 0.6f;
     inline void toggleCue(){cueVisible = !cueVisible;};
+
+    // losing message
+    sf::Text losingMessage{};
+    static constexpr std::string_view LOSING_MESSAGE_STRING{"GAME OVER"};
 };
 
 

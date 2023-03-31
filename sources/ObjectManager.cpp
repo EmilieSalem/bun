@@ -152,6 +152,10 @@ void ObjectManager::changeScreen(sf::Vector2f initialBunnyPosition, sf::Vector2f
     bunnyStartVelocity = initialBunnyVelocity;
 }
 
+void ObjectManager::gameOver() {
+    hasLost = true;
+}
+
 void ObjectManager::updateScreen() {
     if(toClear){
         gameObjectsLowerScreen.clear();
@@ -185,6 +189,11 @@ void ObjectManager::updateScreen() {
         }
         bunnyInLowerScreen = !bunnyInLowerScreen;
         toChange = false;
+    }
+
+    if(hasLost){
+        gameObjectsUpperScreen.clear();
+        gameObjectsLowerScreen.clear();
     }
 }
 

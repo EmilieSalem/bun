@@ -10,7 +10,7 @@ UIManager::UIManager() {
 
     // fixed part
     scoreDisplayFixed.setFont(font);
-    scoreDisplayFixed.setCharacterSize(FONT_SIZE_BIG);
+    scoreDisplayFixed.setCharacterSize(FONT_SIZE_MEDIUM);
     scoreDisplayFixed.setFillColor(FONT_COLOR);
     scoreDisplayFixed.setPosition(DISTANCE_TO_BORDER, DISTANCE_TO_BORDER);
     scoreDisplayFixed.setString(FIXED_PART_STRING.data());
@@ -24,7 +24,7 @@ UIManager::UIManager() {
 
     // variable part
     scoreDisplayVariable.setFont(font);
-    scoreDisplayVariable.setCharacterSize(FONT_SIZE_BIG);
+    scoreDisplayVariable.setCharacterSize(FONT_SIZE_MEDIUM);
     scoreDisplayVariable.setFillColor(FONT_COLOR);
     scoreDisplayVariable.setPosition(CARROT_HORIZONTAL_SHIFT*3 + carrotSprite.getLocalBounds().width + scoreDisplayFixed.getLocalBounds().width, DISTANCE_TO_BORDER);
 
@@ -35,17 +35,25 @@ UIManager::UIManager() {
     nextLevelCue.setString(NEXT_LEVEL_CUE_STRING.data());
     nextLevelCue.setOrigin(nextLevelCue.getLocalBounds().width/2, nextLevelCue.getLocalBounds().height);
     nextLevelCue.setPosition(Utils::getScreenWidth()/2, DISTANCE_TO_BORDER + nextLevelCue.getLocalBounds().height);
+
+    // losing message
+    losingMessage.setFont(font);
+    losingMessage.setCharacterSize(FONT_SIZE_BIG);
+    losingMessage.setFillColor(FONT_COLOR);
+    losingMessage.setString(LOSING_MESSAGE_STRING.data());
+    losingMessage.setOrigin(losingMessage.getLocalBounds().width/2, losingMessage.getLocalBounds().height/2);
+    losingMessage.setPosition(Utils::getScreenWidth()/2, Utils::getScreenHeight()/2);
 }
 
 void UIManager::updateScoreDisplay(int score) {
     scoreDisplayVariable.setString(std::to_string(score));
 }
 
-void UIManager::display(sf::RenderWindow &window, bool withNextLevelCue) {
+void UIManager::display(sf::RenderWindow &window, bool withNextLevelCue, bool gameIsOver) {
     window.draw(scoreDisplayFixed);
     window.draw(carrotSprite);
     window.draw(scoreDisplayVariable);
-    if(withNextLevelCue){
+    if(withNextLevelCue && !gameIsOver){
         auto loopTime = chrono.restart().asSeconds();
         elapsedTime += loopTime;
         if(elapsedTime > FLICKER_TIME){ // makes the text appear/disappear after a set interval of time
@@ -55,5 +63,8 @@ void UIManager::display(sf::RenderWindow &window, bool withNextLevelCue) {
         if(cueVisible){
             window.draw(nextLevelCue);
         }
+    }
+    if(gameIsOver){
+        window.draw(losingMessage);
     }
 }
