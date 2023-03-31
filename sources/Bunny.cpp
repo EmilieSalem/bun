@@ -65,6 +65,12 @@ void Bunny::manageScreenLimits() {
         sf::Vector2f newPosition = sf::Vector2f{position.x, position.y-Utils::getScreenHeight() - getHeight()};
         objectManager.generateNewScreen(newPosition, velocity);
     }
+
+    // top
+    if(position.y <= 0 - getHeight()){
+        sf::Vector2f newPosition = sf::Vector2f{position.x, position.y+Utils::getScreenHeight() + getHeight()};
+        objectManager.generateNewScreen(newPosition, velocity);
+    }
 }
 
 void Bunny::handleCollision(GameObject &otherObject) {

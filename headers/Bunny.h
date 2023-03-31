@@ -33,7 +33,7 @@ private:
     bool isGrounded = true;
     float jumpForce{};
     float pressedTime{};
-    static constexpr float MAX_JUMP_FORCE{2000.f};
+    static constexpr float MAX_JUMP_FORCE{2500.f};
     static constexpr float CHARGE_ACCELERATION_COEFF{1.8f};
     static constexpr float GRAVITY{5};
 

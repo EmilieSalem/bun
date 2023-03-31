@@ -22,7 +22,7 @@ private:
     void randomizePosition();
 
     // to avoid having platforms at the very top/bottom of the screen
-    float static constexpr VERTICAL_BORDER{200.f};
+    float static constexpr VERTICAL_BORDER{150.f};
 };
 
 
