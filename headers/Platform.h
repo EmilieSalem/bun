@@ -15,7 +15,7 @@ protected:
 
 private:
     // appearance
-    static constexpr std::string_view PLATFORM_PATH{"../assets/platform.png"};
+    static constexpr std::string_view PLATFORM_PATH{"../assets/platform_v2.png"};
 
     // position
     PlatformLevel platformLevel{};

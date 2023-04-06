@@ -21,8 +21,8 @@ protected:
 private:
     // appearance
     enum class BunnyStates{IDLE, CHARGING};
-    static constexpr std::string_view IDLE_BUNNY_PATH{"../assets/bunny_idle.png"};
-    static constexpr std::string_view CHARGING_BUNNY_PATH{"../assets/bunny_charging.png"};
+    static constexpr std::string_view IDLE_BUNNY_PATH{"../assets/bunny_idle_v2.png"};
+    static constexpr std::string_view CHARGING_BUNNY_PATH{"../assets/bunny_charging_v2.png"};
     void loadTexture(BunnyStates bunnyState);
 
     // left/right movement physics
