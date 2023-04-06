@@ -1,7 +1,6 @@
 #ifndef BUN_GAMEMANAGER_H
 #define BUN_GAMEMANAGER_H
 
-
 #include "ObjectManager.h"
 #include "UIManager.h"
 
@@ -17,6 +16,9 @@ public:
     void startGame();
     void runGameLoop(sf::RenderWindow& window);
     void runDisplayLoop(sf::RenderWindow& window);
+
+    // manage continue choice
+    void processChoice();
 
 private:
     GameStates gameState{GameStates::START};

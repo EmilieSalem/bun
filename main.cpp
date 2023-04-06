@@ -29,10 +29,12 @@
 
             case GameManager::GameStates::GAME_OVER:
                 gameManager.runDisplayLoop(window);
+                gameManager.processChoice();
                 break;
 
             case GameManager::GameStates::GAME_WON:
                 gameManager.runDisplayLoop(window);
+                gameManager.processChoice();
                 break;
         }
     }

@@ -67,7 +67,7 @@ private :
 
     // win/lose condition
     bool hasLost{false};
-    static int constexpr SCORE_TO_WIN = 25;
+    static int constexpr SCORE_TO_WIN = 5;
 };
 
 #endif //BUN_OBJECTMANAGER_H

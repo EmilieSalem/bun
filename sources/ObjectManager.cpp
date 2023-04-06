@@ -11,6 +11,10 @@ void ObjectManager::addObject(std::unique_ptr<GameObject> object, std::vector<st
 }
 
 void ObjectManager::initializeGame() {
+    // in case of a restart
+    hasLost = false;
+    score = -1;
+
     // generating lower screen
     generatePlatforms(gameObjectsLowerScreen);
     checkPlatformValidity(gameObjectsLowerScreen);

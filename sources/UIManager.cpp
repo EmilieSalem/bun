@@ -75,6 +75,14 @@ UIManager::UIManager() {
     noOption.setString(NO_MESSAGE_STRING.data());
     noOption.setOrigin(noOption.getLocalBounds().width/2, noOption.getLocalBounds().height/2);
     noOption.setPosition(Utils::getScreenWidth() - 800, Utils::getScreenHeight()/2 + losingMessage.getLocalBounds().height*4 - 200);
+
+    // choice/arrow
+    choiceArrow.setFont(font);
+    choiceArrow.setCharacterSize(FONT_SIZE_SMALL);
+    choiceArrow.setFillColor(FONT_COLOR);
+    choiceArrow.setString(CHOICE_ARROW_STRING.data());
+    choiceArrow.setOrigin(choiceArrow.getLocalBounds().width/2, choiceArrow.getLocalBounds().height/2);
+    choiceArrow.setPosition(yesOption.getPosition().x - yesOption.getLocalBounds().width/2 - 50, yesOption.getPosition().y);
 }
 
 void UIManager::updateScoreDisplay(int score) {
@@ -102,18 +110,34 @@ void UIManager::displayPLaying(sf::RenderWindow &window, bool withNextLevelCue) 
     }
 }
 
-void UIManager::displayGameOver(sf::RenderWindow &window) {
+void UIManager::displayContinueMenu(sf::RenderWindow &window, bool losing) {
     displayScore(window);
-    window.draw(losingMessage);
+    if(losing) {
+        window.draw(losingMessage);
+    } else {
+        window.draw(winningMessage);
+    }
+    inputChoice();
+    updateChoice();
     window.draw(continueMessage);
     window.draw(yesOption);
     window.draw(noOption);
+    window.draw(choiceArrow);
 }
 
-void UIManager::displayGameWon(sf::RenderWindow &window) {
-    displayScore(window);
-    window.draw(winningMessage);
-    window.draw(continueMessage);
-    window.draw(yesOption);
-    window.draw(noOption);
+void UIManager::inputChoice() {
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left)){
+        choice = true;
+    }
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right)){
+        choice = false;
+    }
+}
+
+void UIManager::updateChoice() {
+    if(choice){
+        choiceArrow.setPosition(yesOption.getPosition().x - yesOption.getLocalBounds().width/2 - 50, yesOption.getPosition().y);
+    } else{
+        choiceArrow.setPosition(noOption.getPosition().x - noOption.getLocalBounds().width/2 - 50, noOption.getPosition().y);
+    }
 }

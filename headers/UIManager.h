@@ -6,14 +6,14 @@
 
 class UIManager {
 public:
-    UIManager();
+    explicit UIManager();
     void updateScoreDisplay(int score);
     void displayPLaying(sf::RenderWindow &window, bool withNextLevelCue);
-    void displayGameOver(sf::RenderWindow &window);
-    void displayGameWon(sf::RenderWindow &window);
+    void displayContinueMenu(sf::RenderWindow &window, bool losing);
+    inline bool getChoice() const{return choice;};
 
 private:
-    // score displayPLaying
+    // score display
     sf::Text scoreDisplayFixed{};
     sf::Text scoreDisplayVariable{};
     sf::Sprite carrotSprite{};
@@ -64,6 +64,13 @@ private:
     static constexpr std::string_view CONTINUE_MESSAGE_STRING{"CONTINUE?"};
     static constexpr std::string_view YES_MESSAGE_STRING{"YES"};
     static constexpr std::string_view NO_MESSAGE_STRING{"NO"};
+
+    // choice arrow
+    sf::Text choiceArrow{};
+    static constexpr std::string_view CHOICE_ARROW_STRING{"~"};
+    bool choice{true};
+    void inputChoice();
+    void updateChoice();
 };
 
 

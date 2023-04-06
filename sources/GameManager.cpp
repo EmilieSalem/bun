@@ -19,11 +19,10 @@ void GameManager::runGameLoop(sf::RenderWindow &window) {
 }
 
 void GameManager::runDisplayLoop(sf::RenderWindow& window) {
-    if(gameState == GameStates::GAME_OVER) uiManager.displayGameOver(window);
-    if(gameState == GameStates::GAME_WON) uiManager.displayGameWon(window);
+    if(gameState == GameStates::GAME_OVER) uiManager.displayContinueMenu(window, true);
+    if(gameState == GameStates::GAME_WON) uiManager.displayContinueMenu(window, false);
     window.display();
 }
-
 
 void GameManager::updateGameStateAndScreen() {
     objectManager.updateScreen();
@@ -32,5 +31,15 @@ void GameManager::updateGameStateAndScreen() {
     }
     if(objectManager.gameIsWon()) {
         gameState = GameStates::GAME_WON;
+    }
+}
+
+void GameManager::processChoice() {
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::E)){
+        if(uiManager.getChoice()){
+            startGame();
+        } else{
+            gameState = GameStates::START;
+        }
     }
 }
