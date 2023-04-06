@@ -1,37 +1,35 @@
  #include <SFML/Graphics.hpp>
 #include "headers/ColorPalette.h"
-#include "headers/ObjectManager.h"
-#include "headers/UIManager.h"
+#include "headers/GameManager.h"
 
-int main() {
+ int main() {
     // window
     sf::RenderWindow window{sf::VideoMode(), "bun", sf::Style::Fullscreen};
 
-    // objects
-    ObjectManager objectManager{};
-    objectManager.initializeGame();
-
-    // UI
-    UIManager uiManager{};
+    GameManager gameManager{};
 
     while(window.isOpen()){
         auto event = sf::Event();
 
         while(window.pollEvent(event)){
             if(event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape) window.close();
+            if(event.type == sf::Event::KeyPressed && event.key.code ==  sf::Keyboard::Enter && gameManager.currentGameState() == GameManager::GameStates::START_MENU) gameManager.startGame();
         }
 
         window.clear(BEIGE);
+        switch(gameManager.currentGameState()) {
 
-        objectManager.updateCurrentScreen();
-        objectManager.handleCollisionsInCurrentScreen();
-        uiManager.updateScoreDisplay(objectManager.getScore());
+            case GameManager::GameStates::PLAYING:
+                gameManager.runGameLoop(window);
+                break;
 
-        uiManager.display(window, objectManager.noMoreCarrotsInCurrentScreen(), objectManager.gameIsOver(), objectManager.gameIsWon());
-        objectManager.displayCurrentScreen(window);
+            case GameManager::GameStates::START_MENU:
+                window.display();
+                break;
 
-        window.display();
-
-        objectManager.updateScreen();
+            case GameManager::GameStates::GAME_OVER_MENU:
+                window.display();
+                break;
+        }
     }
 }
