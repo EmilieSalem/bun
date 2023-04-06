@@ -13,7 +13,7 @@
 
         while(window.pollEvent(event)){
             if(event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape) window.close();
-            if(event.type == sf::Event::KeyPressed && event.key.code ==  sf::Keyboard::Enter && gameManager.currentGameState() == GameManager::GameStates::START_MENU) gameManager.startGame();
+            if(event.type == sf::Event::KeyPressed && event.key.code ==  sf::Keyboard::Enter && gameManager.currentGameState() == GameManager::GameStates::START) gameManager.startGame();
         }
 
         window.clear(BEIGE);
@@ -23,12 +23,16 @@
                 gameManager.runGameLoop(window);
                 break;
 
-            case GameManager::GameStates::START_MENU:
+            case GameManager::GameStates::START:
                 window.display();
                 break;
 
-            case GameManager::GameStates::GAME_OVER_MENU:
-                window.display();
+            case GameManager::GameStates::GAME_OVER:
+                gameManager.runDisplayLoop(window);
+                break;
+
+            case GameManager::GameStates::GAME_WON:
+                gameManager.runDisplayLoop(window);
                 break;
         }
     }

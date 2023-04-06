@@ -57,11 +57,15 @@ void UIManager::updateScoreDisplay(int score) {
     scoreDisplayVariable.setString(std::to_string(score));
 }
 
-void UIManager::display(sf::RenderWindow &window, bool withNextLevelCue, bool gameIsOver, bool gameIsWon) {
+void UIManager::displayScore(sf::RenderWindow &window) {
     window.draw(scoreDisplayFixed);
     window.draw(carrotSprite);
     window.draw(scoreDisplayVariable);
-    if(withNextLevelCue && !gameIsOver && !gameIsWon){
+}
+
+void UIManager::displayPLaying(sf::RenderWindow &window, bool withNextLevelCue) {
+    displayScore(window);
+    if(withNextLevelCue){
         auto loopTime = chrono.restart().asSeconds();
         elapsedTime += loopTime;
         if(elapsedTime > FLICKER_TIME){ // makes the text appear/disappear after a set interval of time
@@ -72,10 +76,14 @@ void UIManager::display(sf::RenderWindow &window, bool withNextLevelCue, bool ga
             window.draw(nextLevelCue);
         }
     }
-    if(gameIsOver){
-        window.draw(losingMessage);
-    }
-    if(gameIsWon){
-        window.draw(winningMessage);
-    }
+}
+
+void UIManager::displayGameOver(sf::RenderWindow &window) {
+    displayScore(window);
+    window.draw(losingMessage);
+}
+
+void UIManager::displayGameWon(sf::RenderWindow &window) {
+    displayScore(window);
+    window.draw(winningMessage);
 }

@@ -8,15 +8,18 @@ class UIManager {
 public:
     UIManager();
     void updateScoreDisplay(int score);
-    void display(sf::RenderWindow &window, bool withNextLevelCue, bool gameIsOver, bool gameIsWon);
+    void displayPLaying(sf::RenderWindow &window, bool withNextLevelCue);
+    void displayGameOver(sf::RenderWindow &window);
+    void displayGameWon(sf::RenderWindow &window);
 
 private:
-    // score display
+    // score displayPLaying
     sf::Text scoreDisplayFixed{};
     sf::Text scoreDisplayVariable{};
     sf::Sprite carrotSprite{};
     sf::Texture carrotTexture{};
     sf::Font font{};
+    void displayScore(sf::RenderWindow &window);
 
     // font
     static constexpr std::string_view FONT_PATH{"../assets/Early_GameBoy.ttf"};
