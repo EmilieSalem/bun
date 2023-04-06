@@ -56,6 +56,14 @@ private:
     // winning message
     sf::Text winningMessage{};
     static constexpr std::string_view WINNING_MESSAGE_STRING{"YOU WON!"};
+
+    // menu
+    sf::Text continueMessage{};
+    sf::Text yesOption{};
+    sf::Text noOption{};
+    static constexpr std::string_view CONTINUE_MESSAGE_STRING{"CONTINUE?"};
+    static constexpr std::string_view YES_MESSAGE_STRING{"YES"};
+    static constexpr std::string_view NO_MESSAGE_STRING{"NO"};
 };
 
 

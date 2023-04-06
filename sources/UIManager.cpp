@@ -42,7 +42,7 @@ UIManager::UIManager() {
     losingMessage.setFillColor(FONT_COLOR);
     losingMessage.setString(LOSING_MESSAGE_STRING.data());
     losingMessage.setOrigin(losingMessage.getLocalBounds().width/2, losingMessage.getLocalBounds().height/2);
-    losingMessage.setPosition(Utils::getScreenWidth()/2, Utils::getScreenHeight()/2);
+    losingMessage.setPosition(Utils::getScreenWidth()/2, Utils::getScreenHeight()/2 - 200);
 
     // winning message
     winningMessage.setFont(font);
@@ -50,7 +50,31 @@ UIManager::UIManager() {
     winningMessage.setFillColor(FONT_COLOR);
     winningMessage.setString(WINNING_MESSAGE_STRING.data());
     winningMessage.setOrigin(winningMessage.getLocalBounds().width/2, winningMessage.getLocalBounds().height/2);
-    winningMessage.setPosition(Utils::getScreenWidth()/2, Utils::getScreenHeight()/2);
+    winningMessage.setPosition(Utils::getScreenWidth()/2, Utils::getScreenHeight()/2 - 200);
+
+    // continue message
+    continueMessage.setFont(font);
+    continueMessage.setCharacterSize(FONT_SIZE_MEDIUM);
+    continueMessage.setFillColor(FONT_COLOR);
+    continueMessage.setString(CONTINUE_MESSAGE_STRING.data());
+    continueMessage.setOrigin(continueMessage.getLocalBounds().width/2, continueMessage.getLocalBounds().height/2);
+    continueMessage.setPosition(Utils::getScreenWidth()/2, Utils::getScreenHeight()/2 + losingMessage.getLocalBounds().height*2 - 200);
+
+    // yes/no messages
+    yesOption.setFont(font);
+    yesOption.setCharacterSize(FONT_SIZE_SMALL);
+    yesOption.setFillColor(FONT_COLOR);
+    yesOption.setString(YES_MESSAGE_STRING.data());
+    yesOption.setOrigin(yesOption.getLocalBounds().width/2, yesOption.getLocalBounds().height/2);
+    yesOption.setPosition(800, Utils::getScreenHeight()/2 + losingMessage.getLocalBounds().height*4 - 200);
+
+    // yes/no messages
+    noOption.setFont(font);
+    noOption.setCharacterSize(FONT_SIZE_SMALL);
+    noOption.setFillColor(FONT_COLOR);
+    noOption.setString(NO_MESSAGE_STRING.data());
+    noOption.setOrigin(noOption.getLocalBounds().width/2, noOption.getLocalBounds().height/2);
+    noOption.setPosition(Utils::getScreenWidth() - 800, Utils::getScreenHeight()/2 + losingMessage.getLocalBounds().height*4 - 200);
 }
 
 void UIManager::updateScoreDisplay(int score) {
@@ -81,9 +105,15 @@ void UIManager::displayPLaying(sf::RenderWindow &window, bool withNextLevelCue) 
 void UIManager::displayGameOver(sf::RenderWindow &window) {
     displayScore(window);
     window.draw(losingMessage);
+    window.draw(continueMessage);
+    window.draw(yesOption);
+    window.draw(noOption);
 }
 
 void UIManager::displayGameWon(sf::RenderWindow &window) {
     displayScore(window);
     window.draw(winningMessage);
+    window.draw(continueMessage);
+    window.draw(yesOption);
+    window.draw(noOption);
 }
