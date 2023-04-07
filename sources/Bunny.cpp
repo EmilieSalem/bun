@@ -1,13 +1,18 @@
 #include <iostream>
 #include "../headers/Bunny.h"
 
+// CONSTRUCTOR --------------------------------------------------------------------
+
 Bunny::Bunny(sf::Vector2f p_initialPosition, ObjectManager &p_objectManager, sf::Vector2f p_initialVelocity) : GameObject(
         IDLE_BUNNY_PATH,
         p_initialPosition,
-        sf::Vector2f(2.5, 2.5)), objectManager{p_objectManager}{
+        sf::Vector2f(2.5, 2.5)),
+        objectManager{p_objectManager}{
     type = ObjectType::BUNNY;
     velocity = p_initialVelocity;
 }
+
+// CONTROLS | PHYSICS --------------------------------------------------------------------
 
 void Bunny::applyBehavior(float loopTime) {
     // initializing velocities
@@ -49,8 +54,10 @@ void Bunny::applyBehavior(float loopTime) {
     }
 }
 
+// COLLISIONS --------------------------------------------------------------------
+
 void Bunny::manageScreenLimits() {
-    // walls
+    // walls | movement is stopped
     if(position.x + getWidth()/2 >= Utils::getScreenWidth()){
         position.x = Utils::getScreenWidth() - getWidth()/2;
         velocity.x = 0;
@@ -84,7 +91,7 @@ void Bunny::manageScreenLimits() {
 void Bunny::handleCollision(GameObject &otherObject) {
     switch(otherObject.getType()){
 
-        case ObjectType::BUNNY:
+        case ObjectType::BUNNY: // not necessary since we only have one bunny on the screen at the moment
             break;
 
         case ObjectType::PLATFORM:
@@ -105,7 +112,7 @@ void Bunny::handleCollision(GameObject &otherObject) {
             // TODO write better code for this behavior
             if(static_cast<float>(std::abs(position.x - otherObject.getX())) < getWidth()/5 + otherObject.getWidth()/5
             && static_cast<float>(std::abs(position.y - otherObject.getY())) < getHeight()/5 + otherObject.getHeight()/5){
-                otherObject.remove();
+                otherObject.remove(); // picks up the carrot
             }
             break;
 
@@ -115,24 +122,21 @@ void Bunny::handleCollision(GameObject &otherObject) {
     }
 }
 
+// AESTHETIC --------------------------------------------------------------------
+
 void Bunny::loadTexture(Bunny::BunnyStates bunnyState) {
-    // loading the right asset depending on the bunny state
-    switch(bunnyState){
+    switch(bunnyState){ // loading the right asset depending on the bunny state
         case BunnyStates::IDLE : texture.loadFromFile(IDLE_BUNNY_PATH.data()); break;
         case BunnyStates::CHARGING : texture.loadFromFile(CHARGING_BUNNY_PATH.data()); break;
     }
 }
 
+// RELATED OBJECTS --------------------------------------------------------------------
+
 void Bunny::updateRelatedObjects() {
-    // update the bunny
-    GameObject::updateRelatedObjects();
-    // update the charge bar
     chargeBar.updatePosition(position.x, position.y);
 }
 
 void Bunny::displayRelatedObjects(sf::RenderWindow &window) const {
-    // display the bunny
-    GameObject::displayRelatedObjects(window);
-    // display the charge bar
     chargeBar.display(window);
 }
