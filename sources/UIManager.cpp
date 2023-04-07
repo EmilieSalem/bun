@@ -109,7 +109,7 @@ UIManager::UIManager() {
     gameplayHelp.setFont(font);
     gameplayHelp.setCharacterSize(FONT_SIZE_TINY);
     gameplayHelp.setFillColor(PINK);
-    gameplayHelp.setString("COLLECT " + std::to_string(Utils::SCORE_TO_WIN) + " CARROTS WITHOUT FALLING");
+    gameplayHelp.setString("COLLECT " + std::to_string(Utils::SCORE_TO_WIN) + " CARROTS WITHOUT FALLING!");
     gameplayHelp.setOrigin(gameplayHelp.getLocalBounds().width/2, gameplayHelp.getLocalBounds().height/2);
     gameplayHelp.setPosition(Utils::getScreenWidth()/2, Utils::getScreenHeight() - 50);
 }

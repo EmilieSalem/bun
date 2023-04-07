@@ -82,7 +82,7 @@ private:
     sf::Sprite titleScreenSprite{};
     sf::Texture titleScreenTexture{};
     sf::Text startMessage{};
-    static constexpr std::string_view START_MESSAGE_STRING{"PRESS ENTER TO START!"};
+    static constexpr std::string_view START_MESSAGE_STRING{"PRESS ENTER TO START"};
     bool startMessageVisible{true};
     inline void toggleStartMessage(){startMessageVisible = !startMessageVisible;};
     sf::Text gameplayHelp{};
