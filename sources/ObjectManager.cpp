@@ -27,6 +27,10 @@ void ObjectManager::initializeGame() {
 
     // generating bunny in the lower screen
     generateBunny(gameObjectsLowerScreen);
+
+    // to reset the chrono since it started at the ObjectManager creation,
+    // which is not necessarily when the game actually starts
+    chrono.restart().asSeconds();
 }
 
 void ObjectManager::generatePlatforms(std::vector<std::unique_ptr<GameObject>> &gameObjects) {
