@@ -32,10 +32,10 @@ private:
     enum class BunnyStates{IDLE, CHARGING};
 
     /// Path to the image used as texture in the IDLE state.
-    static constexpr std::string_view IDLE_BUNNY_PATH{"../assets/bunny_idle_v2.png"};
+    static constexpr std::string_view IDLE_BUNNY_PATH{"../assets/bunny_idle.png"};
 
     /// Path to the image used as texture in the CHARGING state.
-    static constexpr std::string_view CHARGING_BUNNY_PATH{"../assets/bunny_charging_v2.png"};
+    static constexpr std::string_view CHARGING_BUNNY_PATH{"../assets/bunny_charging.png"};
 
     /// Loads the right texture to the sprite depending on the Bunny state.
     /// \param bunnyState Current state of the Bunny. Can be IDLE or CHARGING.
