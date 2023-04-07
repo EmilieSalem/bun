@@ -75,6 +75,14 @@ UIManager::UIManager() {
     noOption.setOrigin(noOption.getLocalBounds().width/2, noOption.getLocalBounds().height/2);
     noOption.setPosition(Utils::getScreenWidth() - 800, Utils::getScreenHeight()/2 + losingMessage.getLocalBounds().height*4 - 200);
 
+    // command help
+    commandHelp.setFont(font);
+    commandHelp.setCharacterSize(FONT_SIZE_TINY);
+    commandHelp.setFillColor(FONT_COLOR);
+    commandHelp.setString(COMMAND_HELP_STRING.data());
+    commandHelp.setOrigin(commandHelp.getLocalBounds().width/2, commandHelp.getLocalBounds().height/2);
+    commandHelp.setPosition(Utils::getScreenWidth()/2, Utils::getScreenHeight() - 80);
+
     // choice/arrow
     choiceArrow.setFont(font);
     choiceArrow.setCharacterSize(FONT_SIZE_SMALL);
@@ -136,6 +144,7 @@ void UIManager::displayContinueMenu(sf::RenderWindow &window, bool losing) {
     window.draw(yesOption);
     window.draw(noOption);
     window.draw(choiceArrow);
+    window.draw(commandHelp);
 }
 
 void UIManager::displayTitleScreen(sf::RenderWindow &window) {

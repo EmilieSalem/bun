@@ -26,10 +26,10 @@ private:
     static constexpr std::string_view FONT_PATH{"../assets/Early_GameBoy.ttf"};
 
     // text
-    static int constexpr FONT_SIZE_HUGE{300};
     static int constexpr FONT_SIZE_BIG{100};
     static int constexpr FONT_SIZE_MEDIUM{70};
     static int constexpr FONT_SIZE_SMALL{45};
+    static int constexpr FONT_SIZE_TINY{25};
     static const sf::Color FONT_COLOR;
     static constexpr float DISTANCE_TO_BORDER{25};
     static constexpr std::string_view FIXED_PART_STRING{"SCORE : "};
@@ -63,9 +63,11 @@ private:
     sf::Text continueMessage{};
     sf::Text yesOption{};
     sf::Text noOption{};
+    sf::Text commandHelp{};
     static constexpr std::string_view CONTINUE_MESSAGE_STRING{"CONTINUE?"};
     static constexpr std::string_view YES_MESSAGE_STRING{"YES"};
     static constexpr std::string_view NO_MESSAGE_STRING{"NO"};
+    static constexpr std::string_view COMMAND_HELP_STRING{"* PRESS E TO CONFIRM"};
 
     // choice arrow
     sf::Text choiceArrow{};
