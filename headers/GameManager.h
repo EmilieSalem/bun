@@ -15,7 +15,8 @@ public:
     // run game
     void startGame();
     void runGameLoop(sf::RenderWindow& window);
-    void runDisplayLoop(sf::RenderWindow& window);
+    void runContinueLoop(sf::RenderWindow& window);
+    void runStartLoop(sf::RenderWindow& window);
 
     // manage continue choice
     void processChoice();

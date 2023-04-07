@@ -10,6 +10,7 @@ public:
     void updateScoreDisplay(int score);
     void displayPLaying(sf::RenderWindow &window, bool withNextLevelCue);
     void displayContinueMenu(sf::RenderWindow &window, bool losing);
+    void displayTitleScreen(sf::RenderWindow &window);
     inline bool getChoice() const{return choice;};
 
 private:
@@ -25,6 +26,7 @@ private:
     static constexpr std::string_view FONT_PATH{"../assets/Early_GameBoy.ttf"};
 
     // text
+    static int constexpr FONT_SIZE_HUGE{300};
     static int constexpr FONT_SIZE_BIG{100};
     static int constexpr FONT_SIZE_MEDIUM{70};
     static int constexpr FONT_SIZE_SMALL{45};
@@ -71,6 +73,11 @@ private:
     bool choice{true};
     void inputChoice();
     void updateChoice();
+
+    // start screen
+    static constexpr std::string_view TITLE_SCREEN_PATH{"../assets/title_screen.png"};
+    sf::Sprite titleScreenSprite{};
+    sf::Texture titleScreenTexture{};
 };
 
 

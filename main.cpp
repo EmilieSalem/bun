@@ -24,16 +24,16 @@
                 break;
 
             case GameManager::GameStates::START:
-                window.display();
+                gameManager.runStartLoop(window);
                 break;
 
             case GameManager::GameStates::GAME_OVER:
-                gameManager.runDisplayLoop(window);
+                gameManager.runContinueLoop(window);
                 gameManager.processChoice();
                 break;
 
             case GameManager::GameStates::GAME_WON:
-                gameManager.runDisplayLoop(window);
+                gameManager.runContinueLoop(window);
                 gameManager.processChoice();
                 break;
         }

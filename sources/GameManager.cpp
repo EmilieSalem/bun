@@ -18,9 +18,14 @@ void GameManager::runGameLoop(sf::RenderWindow &window) {
     updateGameStateAndScreen();
 }
 
-void GameManager::runDisplayLoop(sf::RenderWindow& window) {
+void GameManager::runContinueLoop(sf::RenderWindow& window) {
     if(gameState == GameStates::GAME_OVER) uiManager.displayContinueMenu(window, true);
     if(gameState == GameStates::GAME_WON) uiManager.displayContinueMenu(window, false);
+    window.display();
+}
+
+void GameManager::runStartLoop(sf::RenderWindow &window) {
+    uiManager.displayTitleScreen(window);
     window.display();
 }
 

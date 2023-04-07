@@ -1,4 +1,3 @@
-#include <iostream>
 #include "../headers/UIManager.h"
 #include "../headers/Utils.h"
 
@@ -60,7 +59,7 @@ UIManager::UIManager() {
     continueMessage.setOrigin(continueMessage.getLocalBounds().width/2, continueMessage.getLocalBounds().height/2);
     continueMessage.setPosition(Utils::getScreenWidth()/2, Utils::getScreenHeight()/2 + losingMessage.getLocalBounds().height*2 - 200);
 
-    // yes/no messages
+    // yes message
     yesOption.setFont(font);
     yesOption.setCharacterSize(FONT_SIZE_SMALL);
     yesOption.setFillColor(FONT_COLOR);
@@ -68,7 +67,7 @@ UIManager::UIManager() {
     yesOption.setOrigin(yesOption.getLocalBounds().width/2, yesOption.getLocalBounds().height/2);
     yesOption.setPosition(800, Utils::getScreenHeight()/2 + losingMessage.getLocalBounds().height*4 - 200);
 
-    // yes/no messages
+    // no message
     noOption.setFont(font);
     noOption.setCharacterSize(FONT_SIZE_SMALL);
     noOption.setFillColor(FONT_COLOR);
@@ -83,6 +82,12 @@ UIManager::UIManager() {
     choiceArrow.setString(CHOICE_ARROW_STRING.data());
     choiceArrow.setOrigin(choiceArrow.getLocalBounds().width/2, choiceArrow.getLocalBounds().height/2);
     choiceArrow.setPosition(yesOption.getPosition().x - yesOption.getLocalBounds().width/2 - 50, yesOption.getPosition().y);
+
+    // title screen
+    titleScreenTexture.loadFromFile(TITLE_SCREEN_PATH.data());
+    titleScreenSprite.setTexture(titleScreenTexture);
+    titleScreenSprite.setOrigin(titleScreenSprite.getLocalBounds().width / 2, titleScreenSprite.getLocalBounds().height / 2);
+    titleScreenSprite.setPosition(Utils::getScreenWidth()/2, Utils::getScreenHeight()/2);
 }
 
 void UIManager::updateScoreDisplay(int score) {
@@ -123,6 +128,10 @@ void UIManager::displayContinueMenu(sf::RenderWindow &window, bool losing) {
     window.draw(yesOption);
     window.draw(noOption);
     window.draw(choiceArrow);
+}
+
+void UIManager::displayTitleScreen(sf::RenderWindow &window) {
+    window.draw(titleScreenSprite);
 }
 
 void UIManager::inputChoice() {
