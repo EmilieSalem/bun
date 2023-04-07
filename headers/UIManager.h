@@ -3,6 +3,7 @@
 
 #include <SFML/Graphics.hpp>
 #include "../headers/ColorPalette.h"
+#include "Utils.h"
 
 class UIManager {
 public:
@@ -67,7 +68,7 @@ private:
     static constexpr std::string_view CONTINUE_MESSAGE_STRING{"CONTINUE?"};
     static constexpr std::string_view YES_MESSAGE_STRING{"YES"};
     static constexpr std::string_view NO_MESSAGE_STRING{"NO"};
-    static constexpr std::string_view COMMAND_HELP_STRING{"* PRESS E TO CONFIRM"};
+    static constexpr std::string_view COMMAND_HELP_STRING{"PRESS E TO CONFIRM"};
 
     // choice arrow
     sf::Text choiceArrow{};
@@ -84,6 +85,7 @@ private:
     static constexpr std::string_view START_MESSAGE_STRING{"PRESS ENTER TO START!"};
     bool startMessageVisible{true};
     inline void toggleStartMessage(){startMessageVisible = !startMessageVisible;};
+    sf::Text gameplayHelp{};
 };
 
 

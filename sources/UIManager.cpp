@@ -41,7 +41,7 @@ UIManager::UIManager() {
     losingMessage.setFillColor(FONT_COLOR);
     losingMessage.setString(LOSING_MESSAGE_STRING.data());
     losingMessage.setOrigin(losingMessage.getLocalBounds().width/2, losingMessage.getLocalBounds().height/2);
-    losingMessage.setPosition(Utils::getScreenWidth()/2, Utils::getScreenHeight()/2 - 200);
+    losingMessage.setPosition(Utils::getScreenWidth()/2, Utils::getScreenHeight()/2 - 100);
 
     // winning message
     winningMessage.setFont(font);
@@ -49,15 +49,15 @@ UIManager::UIManager() {
     winningMessage.setFillColor(FONT_COLOR);
     winningMessage.setString(WINNING_MESSAGE_STRING.data());
     winningMessage.setOrigin(winningMessage.getLocalBounds().width/2, winningMessage.getLocalBounds().height/2);
-    winningMessage.setPosition(Utils::getScreenWidth()/2, Utils::getScreenHeight()/2 - 200);
+    winningMessage.setPosition(Utils::getScreenWidth()/2, Utils::getScreenHeight()/2 - 100);
 
     // continue message
     continueMessage.setFont(font);
-    continueMessage.setCharacterSize(FONT_SIZE_MEDIUM);
+    continueMessage.setCharacterSize(FONT_SIZE_SMALL);
     continueMessage.setFillColor(FONT_COLOR);
     continueMessage.setString(CONTINUE_MESSAGE_STRING.data());
     continueMessage.setOrigin(continueMessage.getLocalBounds().width/2, continueMessage.getLocalBounds().height/2);
-    continueMessage.setPosition(Utils::getScreenWidth()/2, Utils::getScreenHeight()/2 + losingMessage.getLocalBounds().height*2 - 200);
+    continueMessage.setPosition(Utils::getScreenWidth()/2, Utils::getScreenHeight()/2 + 25);
 
     // yes message
     yesOption.setFont(font);
@@ -65,7 +65,7 @@ UIManager::UIManager() {
     yesOption.setFillColor(FONT_COLOR);
     yesOption.setString(YES_MESSAGE_STRING.data());
     yesOption.setOrigin(yesOption.getLocalBounds().width/2, yesOption.getLocalBounds().height/2);
-    yesOption.setPosition(800, Utils::getScreenHeight()/2 + losingMessage.getLocalBounds().height*4 - 200);
+    yesOption.setPosition(800, Utils::getScreenHeight()/2 + losingMessage.getLocalBounds().height*4.2 - 200);
 
     // no message
     noOption.setFont(font);
@@ -73,15 +73,15 @@ UIManager::UIManager() {
     noOption.setFillColor(FONT_COLOR);
     noOption.setString(NO_MESSAGE_STRING.data());
     noOption.setOrigin(noOption.getLocalBounds().width/2, noOption.getLocalBounds().height/2);
-    noOption.setPosition(Utils::getScreenWidth() - 800, Utils::getScreenHeight()/2 + losingMessage.getLocalBounds().height*4 - 200);
+    noOption.setPosition(Utils::getScreenWidth() - 800, Utils::getScreenHeight()/2 + losingMessage.getLocalBounds().height*4.2 - 200);
 
     // command help
     commandHelp.setFont(font);
     commandHelp.setCharacterSize(FONT_SIZE_TINY);
-    commandHelp.setFillColor(FONT_COLOR);
+    commandHelp.setFillColor(PINK);
     commandHelp.setString(COMMAND_HELP_STRING.data());
     commandHelp.setOrigin(commandHelp.getLocalBounds().width/2, commandHelp.getLocalBounds().height/2);
-    commandHelp.setPosition(Utils::getScreenWidth()/2, Utils::getScreenHeight() - 80);
+    commandHelp.setPosition(Utils::getScreenWidth()/2, Utils::getScreenHeight() - 50);
 
     // choice/arrow
     choiceArrow.setFont(font);
@@ -104,6 +104,14 @@ UIManager::UIManager() {
     startMessage.setString(START_MESSAGE_STRING.data());
     startMessage.setOrigin(startMessage.getLocalBounds().width/2, startMessage.getLocalBounds().height/2);
     startMessage.setPosition(Utils::getScreenWidth()/2, Utils::getScreenHeight()/2 + 220);
+
+    // gameplay
+    gameplayHelp.setFont(font);
+    gameplayHelp.setCharacterSize(FONT_SIZE_TINY);
+    gameplayHelp.setFillColor(PINK);
+    gameplayHelp.setString("COLLECT " + std::to_string(Utils::SCORE_TO_WIN) + " CARROTS WITHOUT FALLING");
+    gameplayHelp.setOrigin(gameplayHelp.getLocalBounds().width/2, gameplayHelp.getLocalBounds().height/2);
+    gameplayHelp.setPosition(Utils::getScreenWidth()/2, Utils::getScreenHeight() - 50);
 }
 
 void UIManager::updateScoreDisplay(int score) {
@@ -158,6 +166,7 @@ void UIManager::displayTitleScreen(sf::RenderWindow &window) {
     if(startMessageVisible){
         window.draw(startMessage);
     }
+    window.draw(gameplayHelp);
 }
 
 void UIManager::inputChoice() {
