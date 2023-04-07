@@ -1,7 +1,8 @@
-#include <iostream>
 #include <random>
 #include <chrono>
 #include "../headers/Platform.h"
+
+// CONSTRUCTOR  --------------------------------------------------------------------
 
 Platform::Platform(PlatformLevel p_platformLevel) : GameObject(
         PLATFORM_PATH,
@@ -9,9 +10,11 @@ Platform::Platform(PlatformLevel p_platformLevel) : GameObject(
         sf::Vector2f(2.2, 2.2)),
         platformLevel{p_platformLevel} {
     type = ObjectType::PLATFORM;
-    randomizePosition();
+    randomizePosition(); // generates the random position
     sprite.setPosition(position);
 }
+
+// POSITION  --------------------------------------------------------------------
 
 void Platform::randomizePosition() {
     // generating a seed with the current time for true randomness
@@ -30,15 +33,15 @@ void Platform::randomizePosition() {
     auto vertical_sup = 0.f;
 
     switch(platformLevel){ // different bounds depending on the part of the screen
-        case PlatformLevel::LOW :
+        case PlatformLevel::LOW: // bottom third of the screen
             vertical_inf = 2 * Utils::getScreenHeight()/3 + getHeight()/2;
             vertical_sup = Utils::getScreenHeight() - getHeight()/2 - VERTICAL_BORDER;
             break;
-        case PlatformLevel::MIDDLE:
+        case PlatformLevel::MIDDLE: // middle third of the screen
             vertical_inf = Utils::getScreenHeight()/3 + getHeight()/2;
             vertical_sup = 2 * Utils::getScreenHeight()/3 - getHeight()/2;
             break;
-        case PlatformLevel::HIGH :
+        case PlatformLevel::HIGH : // top third of the screen
             vertical_inf = VERTICAL_BORDER;
             vertical_sup = Utils::getScreenHeight()/3 - getHeight()/2;
             break;
@@ -49,6 +52,8 @@ void Platform::randomizePosition() {
     // generating and setting the randomized position
     position = sf::Vector2f(horizontalDistribution(generator), verticalDistribution(generator));
 }
+
+// COLLISION  --------------------------------------------------------------------
 
 void Platform::handleCollision(GameObject &otherObject) {
     if(otherObject.getType() == ObjectType::PLATFORM){ // if there is overlap with another platform
