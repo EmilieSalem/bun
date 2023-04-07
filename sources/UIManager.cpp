@@ -88,6 +88,14 @@ UIManager::UIManager() {
     titleScreenSprite.setTexture(titleScreenTexture);
     titleScreenSprite.setOrigin(titleScreenSprite.getLocalBounds().width / 2, titleScreenSprite.getLocalBounds().height / 2);
     titleScreenSprite.setPosition(Utils::getScreenWidth()/2, Utils::getScreenHeight()/2);
+
+    // start message
+    startMessage.setFont(font);
+    startMessage.setCharacterSize(FONT_SIZE_SMALL);
+    startMessage.setFillColor(FONT_COLOR);
+    startMessage.setString(START_MESSAGE_STRING.data());
+    startMessage.setOrigin(startMessage.getLocalBounds().width/2, startMessage.getLocalBounds().height/2);
+    startMessage.setPosition(Utils::getScreenWidth()/2, Utils::getScreenHeight()/2 + 220);
 }
 
 void UIManager::updateScoreDisplay(int score) {
@@ -132,6 +140,15 @@ void UIManager::displayContinueMenu(sf::RenderWindow &window, bool losing) {
 
 void UIManager::displayTitleScreen(sf::RenderWindow &window) {
     window.draw(titleScreenSprite);
+    auto loopTime = chrono.restart().asSeconds();
+    elapsedTime += loopTime;
+    if(elapsedTime > FLICKER_TIME){ // makes the text appear/disappear after a set interval of time
+        elapsedTime = 0;
+        toggleStartMessage();
+    }
+    if(startMessageVisible){
+        window.draw(startMessage);
+    }
 }
 
 void UIManager::inputChoice() {

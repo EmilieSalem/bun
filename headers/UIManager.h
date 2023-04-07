@@ -78,6 +78,10 @@ private:
     static constexpr std::string_view TITLE_SCREEN_PATH{"../assets/title_screen.png"};
     sf::Sprite titleScreenSprite{};
     sf::Texture titleScreenTexture{};
+    sf::Text startMessage{};
+    static constexpr std::string_view START_MESSAGE_STRING{"PRESS ENTER TO START!"};
+    bool startMessageVisible{true};
+    inline void toggleStartMessage(){startMessageVisible = !startMessageVisible;};
 };
 
 
