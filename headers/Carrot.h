@@ -4,6 +4,7 @@
 #include "GameObject.h"
 #include "Platform.h"
 
+/// A Carrot that the Bunny can pick up to increase the player's score.
 class Carrot : public GameObject{
 public:
     // CONSTRUCTOR  --------------------------------------------------------------------

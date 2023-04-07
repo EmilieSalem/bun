@@ -4,6 +4,7 @@
 #include "ChargeBar.h"
 #include "ObjectManager.h"
 
+/// The Bunny controlled by the player.
 class Bunny : public GameObject {
 
 public:
