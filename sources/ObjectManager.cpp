@@ -137,7 +137,6 @@ void ObjectManager::displayCurrentScreen(sf::RenderWindow &window) {
 // SCREEN MANAGEMENT  --------------------------------------------------------------------
 
 bool ObjectManager::noMoreCarrots(std::vector<std::unique_ptr<GameObject>> &gameObjects) {
-    bool carrotsInTheLevel = true;
     for(auto i{0u}; i < gameObjects.size(); ++i){
         if(gameObjects[i]->getType() == ObjectType::CARROT){
             if(!gameObjects[i]->isRemoved()) return false;

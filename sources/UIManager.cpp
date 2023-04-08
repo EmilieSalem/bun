@@ -1,5 +1,4 @@
 #include "../headers/UIManager.h"
-#include "../headers/Utils.h"
 
  sf::Color const UIManager::FONT_COLOR{BROWN};
 
