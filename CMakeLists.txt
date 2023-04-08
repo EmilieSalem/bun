@@ -2,6 +2,7 @@ cmake_minimum_required(VERSION 3.24)
 project(bun)
 
 set(CMAKE_CXX_STANDARD 17)
+set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -static-libstdc++ -static-libgcc")
 
 add_executable(bun main.cpp headers/ColorPalette.h headers/GameObject.h sources/GameObject.cpp headers/Bunny.h sources/Bunny.cpp headers/ChargeBar.h sources/ChargeBar.cpp headers/Platform.h sources/Platform.cpp headers/Utils.h headers/Utils.h headers/Utils.h headers/Carrot.h sources/Carrot.cpp headers/ObjectManager.h sources/ObjectManager.cpp headers/UIManager.h sources/UIManager.cpp headers/GameManager.h sources/GameManager.cpp)
 
