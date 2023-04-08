@@ -3,6 +3,8 @@
 
  sf::Color const UIManager::FONT_COLOR{BROWN};
 
+// CONSTRUCTOR --------------------------------------------------------------------
+
 UIManager::UIManager() {
     // font
     font.loadFromFile(FONT_PATH.data());
@@ -114,6 +116,8 @@ UIManager::UIManager() {
     gameplayHelp.setPosition(Utils::getScreenWidth()/2, Utils::getScreenHeight() - 50);
 }
 
+// SCORE DISPLAY --------------------------------------------------------------------
+
 void UIManager::updateScoreDisplay(int score) {
     scoreDisplayVariable.setString(std::to_string(score));
 }
@@ -124,9 +128,12 @@ void UIManager::displayScore(sf::RenderWindow &window) {
     window.draw(scoreDisplayVariable);
 }
 
+// UI LOOPS --------------------------------------------------------------------
+
 void UIManager::displayPLaying(sf::RenderWindow &window, bool withNextLevelCue) {
     displayScore(window);
     if(withNextLevelCue){
+        // TODO create a flickering function since it is used by several text elements
         auto loopTime = chrono.restart().asSeconds();
         elapsedTime += loopTime;
         if(elapsedTime > FLICKER_TIME){ // makes the text appear/disappear after a set interval of time
@@ -157,6 +164,7 @@ void UIManager::displayContinueMenu(sf::RenderWindow &window, bool losing) {
 
 void UIManager::displayTitleScreen(sf::RenderWindow &window) {
     window.draw(titleScreenSprite);
+    // flickering
     auto loopTime = chrono.restart().asSeconds();
     elapsedTime += loopTime;
     if(elapsedTime > FLICKER_TIME){ // makes the text appear/disappear after a set interval of time
@@ -169,6 +177,8 @@ void UIManager::displayTitleScreen(sf::RenderWindow &window) {
     window.draw(gameplayHelp);
 }
 
+// CONTINUE CHOICE --------------------------------------------------------------------
+
 void UIManager::inputChoice() {
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left)){
         choice = true;
@@ -179,9 +189,9 @@ void UIManager::inputChoice() {
 }
 
 void UIManager::updateChoice() {
-    if(choice){
+    if(choice){ // moves the arrow in front of "yes"
         choiceArrow.setPosition(yesOption.getPosition().x - yesOption.getLocalBounds().width/2 - 50, yesOption.getPosition().y);
-    } else{
+    } else{ // moves the arrow in front of "no"
         choiceArrow.setPosition(noOption.getPosition().x - noOption.getLocalBounds().width/2 - 50, noOption.getPosition().y);
     }
 }
