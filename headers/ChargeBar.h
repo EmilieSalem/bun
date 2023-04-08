@@ -4,30 +4,48 @@
 #include <SFML/Graphics.hpp>
 #include "GameObject.h"
 
+/// A bar associated to the Bunny to indicate the progress of the jump charge when pressing the space key.
 class ChargeBar {
 public:
-    // constructor
+    // CONSTRUCTOR --------------------------------------------------------------------
+    /// Initializes a ChargeBar.
     explicit ChargeBar();
-
-    // managing bar progress and position
-    void updateProgress(float percentage);
-    void display(sf::RenderWindow& window) const;
-    void updatePosition(float referenceX, float referenceY);
-
-    // disabling copy
+    /// Disables the possibility to construct a ChargeBar from another.
+    /// \param other Other ChargeBar.
     ChargeBar(ChargeBar const& other) = delete;
+    /// Disables the possibility to copy a ChargeBar.
+    /// \param other Other ChargeBar.
     void operator=(ChargeBar const& other) = delete;
 
+    // BAR STATE --------------------------------------------------------------------
+    /// Updates the size of the ChargeBar based on the jump charge progress.
+    /// \param percentage Progress of the jump charge (between 0 and 1).
+    void updateProgress(float percentage);
+    /// Sets the position of the ChargeBar so that it is floating next to a reference object (e.g. the Bunny).
+    /// \param referenceX x position of the reference object.
+    /// \param referenceY y position of the reference object.
+    void updatePosition(float referenceX, float referenceY);
+    /// Displays the ChargeBar in the given window.
+    /// \param window SFML window in which the game runs.
+    void display(sf::RenderWindow& window) const;
+
 private:
-    // attributes
+    // AESTHETIC --------------------------------------------------------------------
+    /// Rectangular shape representing the ChargeBar.
     sf::RectangleShape bar{};
+    /// Color of the ChargeBar.
     sf::Color color{};
+    /// Scale of the ChargeBar.
     sf::Vector2f scale{};
 
-    // constants
+    // CONSTANTS --------------------------------------------------------------------
+    /// Width of the ChargeBar.
     static constexpr int BAR_WIDTH = 17;
+    /// Height of the ChargeBar.
     static constexpr int BAR_HEIGHT = 50;
+    /// X axis distance to the reference object the ChargeBar floats next to.
     static constexpr float X_AXIS_SHIFT = 70;
+    /// Y axis distance to the reference object the ChargeBar floats next to.
     static constexpr float Y_AXIS_SHIFT = 0;
 };
 
