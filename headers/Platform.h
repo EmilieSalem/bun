@@ -4,13 +4,14 @@
 #include "GameObject.h"
 #include "../headers/Utils.h"
 
-/// Defines the different levels at which a platform can be initialized.
-/// Each level corresponds to a third of the screen.
-enum class PlatformLevel{ LOW, MIDDLE, HIGH };
-
 /// A Platform on which the Bunny can land. Its position is randomized.
 class Platform : public GameObject {
 public:
+    // LEVELS  --------------------------------------------------------------------
+    /// Defines the different levels at which a platform can be initialized.
+    /// Each level corresponds to a third of the screen.
+    enum class PlatformLevel{ LOW, MIDDLE, HIGH };
+
     // CONSTRUCTOR  --------------------------------------------------------------------
     /// Initializes a Platform at the given level of the screen.
     /// \param p_platformLevel Level of the screen at which the platform should be generated. Can be LOW, MIDDLE or HIGH.
