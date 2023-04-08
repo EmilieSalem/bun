@@ -4,14 +4,14 @@
 #include "../headers/Carrot.h"
 #include "../headers/Bunny.h"
 
-ObjectManager::ObjectManager() = default;
+// INITIALIZATION --------------------------------------------------------------------
 
 void ObjectManager::addObject(std::unique_ptr<GameObject> object, std::vector<std::unique_ptr<GameObject>> &gameObjects) {
     gameObjects.push_back(std::move(object));
 }
 
 void ObjectManager::initializeGame() {
-    // in case of a restart
+    // to reset parameters
     hasLost = false;
     score = -1;
 
@@ -34,7 +34,7 @@ void ObjectManager::initializeGame() {
 }
 
 void ObjectManager::generatePlatforms(std::vector<std::unique_ptr<GameObject>> &gameObjects) {
-    // generating 2 of each type of platform
+    // generating 7 platforms of different types
     addObject(std::make_unique<Platform>(Platform::PlatformLevel::LOW), gameObjects);
     addObject(std::make_unique<Platform>(Platform::PlatformLevel::LOW), gameObjects);
     addObject(std::make_unique<Platform>(Platform::PlatformLevel::MIDDLE), gameObjects);
@@ -71,13 +71,17 @@ void ObjectManager::generateCarrots(std::vector<std::unique_ptr<GameObject>> &ga
 
 
 void ObjectManager::generateBunny(std::vector<std::unique_ptr<GameObject>> &gameObjects) {
+    // generating the bunny on the first platform of the screen
     sf::Vector2f initialPosition{gameObjects[0]->getX(), gameObjects[0]->getY() - gameObjects[0]->getHeight() / 3};
     addObject(std::make_unique<Bunny>(initialPosition, *this), gameObjects);
 }
 
 void ObjectManager::generateBunny(std::vector<std::unique_ptr<GameObject>> &gameObjects, sf::Vector2f initialPosition, sf::Vector2f initialVelocity) {
+    // generating the bunny with the given position and velocity
     addObject(std::make_unique<Bunny>(initialPosition, *this, initialVelocity), gameObjects);
 }
+
+// GAME LOOP --------------------------------------------------------------------
 
 void ObjectManager::update(std::vector<std::unique_ptr<GameObject>> &gameObjects) {
     auto loopTime = chrono.restart().asSeconds();
@@ -129,6 +133,8 @@ void ObjectManager::displayCurrentScreen(sf::RenderWindow &window) {
     }
 }
 
+// SCREEN MANAGEMENT  --------------------------------------------------------------------
+
 bool ObjectManager::noMoreCarrots(std::vector<std::unique_ptr<GameObject>> &gameObjects) {
     bool carrotsInTheLevel = true;
     for(auto i{0u}; i < gameObjects.size(); ++i){
@@ -164,8 +170,8 @@ void ObjectManager::gameOver() {
     hasLost = true;
 }
 
-void ObjectManager::updateScreen() {
-    if(toClear){
+void ObjectManager::manageScreens() {
+    if(toClear){ // new screen generation
         gameObjectsLowerScreen.clear();
         gameObjectsUpperScreen.pop_back(); // removing the bunny from the upper screen
 
@@ -187,7 +193,7 @@ void ObjectManager::updateScreen() {
         toClear = false;
     }
 
-    if(toChange){
+    if(toChange){ // switching between existing screens
         if(bunnyInLowerScreen){ // removing the bunny from the lower screen to put it in the upper screen
             gameObjectsLowerScreen.pop_back();
             generateBunny(gameObjectsUpperScreen, bunnyStartPosition, bunnyStartVelocity);
@@ -199,7 +205,7 @@ void ObjectManager::updateScreen() {
         toChange = false;
     }
 
-    if(gameIsOver() || gameIsWon()){
+    if(gameIsOver() || gameIsWon()){ // ending the game
         gameObjectsUpperScreen.clear();
         gameObjectsLowerScreen.clear();
     }

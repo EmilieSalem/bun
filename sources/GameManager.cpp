@@ -30,7 +30,7 @@ void GameManager::runStartLoop(sf::RenderWindow &window) {
 }
 
 void GameManager::updateGameStateAndScreen() {
-    objectManager.updateScreen();
+    objectManager.manageScreens();
     if(objectManager.gameIsOver()) {
         gameState = GameStates::GAME_OVER;
     }
