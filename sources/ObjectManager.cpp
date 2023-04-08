@@ -14,6 +14,7 @@ void ObjectManager::initializeGame() {
     // to reset parameters
     hasLost = false;
     score = -1;
+    bunnyInLowerScreen = true;
 
     // generating lower screen
     generatePlatforms(gameObjectsLowerScreen);
