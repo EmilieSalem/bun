@@ -14,7 +14,6 @@
 # Compiled Dynamic libraries
 *.so
 *.dylib
-*.dll
 
 # Fortran module files
 *.mod
@@ -27,12 +26,12 @@
 *.lib
 
 # Executables
-*.exe
 *.out
 *.app
 
 # CMake
 cmake-build-debug/
+cmake-build-release/
 
 # .idea
 .idea/
