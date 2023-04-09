@@ -57,7 +57,7 @@ A prompt will remind you to go up when you have collected all the carrots on the
 </p>
 
 You win if you manage to collect 15 carrots, but you lose if you fall through a maximum of 2 screens. 
-In both case, you will be prompted to choose between starting a new game or going back to the title screen.
+In both cases, you will be prompted to choose between starting a new game or going back to the title screen.
 Press `E` to confirm your choice.
 
 # Have fun! :rabbit2:
